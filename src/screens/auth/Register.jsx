@@ -38,7 +38,7 @@ const Register = () => {
         Toast.show({
           type: 'success',
           text1: 'Register Success',
-          text2: 'Check Email Confirmation',
+          text2: 'Confirm your email to complete your registration',
           position: 'top',
           visibilityTime: 3000,
           topOffset: 50,

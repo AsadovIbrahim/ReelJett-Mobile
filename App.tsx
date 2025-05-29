@@ -9,6 +9,7 @@ import { useMMKVString } from 'react-native-mmkv';
 import { useTranslation } from 'react-i18next';
 import "./src/locales/index"
 import Toast from 'react-native-toast-message';
+import { toastConfig } from './src/common/toastConfig';
 
 const App = () => {
 
@@ -26,7 +27,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <Navigation />
-        <Toast />
+        <Toast config={toastConfig} />
       </SafeAreaView>
     </SafeAreaProvider>
   )
