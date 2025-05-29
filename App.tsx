@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useMMKVString } from 'react-native-mmkv';
 import { useTranslation } from 'react-i18next';
 import "./src/locales/index"
+import Toast from 'react-native-toast-message';
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <Navigation />
+        <Toast />
       </SafeAreaView>
     </SafeAreaProvider>
   )
