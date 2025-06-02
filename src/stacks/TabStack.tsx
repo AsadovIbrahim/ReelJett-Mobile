@@ -1,0 +1,31 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ProfileStack from './ProfileStack';
+import HomeStack from './HomeStack';
+import TabBar from './components/TabBar';
+import SearchStack from './SearchStack';
+import ProfessionalMovieStack from './ProfessionalMovieStack';
+
+const Tab = createBottomTabNavigator();
+
+const TabStack = () => {
+  return (
+    <Tab.Navigator
+      tabBar={
+        ({ state, descriptors, navigation }:any) =>
+          <TabBar
+            state={state}
+            descriptors={descriptors}
+            navigation={navigation}
+          />
+      }
+      screenOptions={{ headerShown: false }}>
+      <Tab.Screen name='Home' component={HomeStack} />
+      <Tab.Screen name='Movies' component={ProfessionalMovieStack} />
+      <Tab.Screen name='Videos' component={ProfileStack} />
+      <Tab.Screen name='Search' component={SearchStack} />
+      <Tab.Screen name='Profile' component={ProfileStack} />
+    </Tab.Navigator>
+  )
+}
+
+export default TabStack

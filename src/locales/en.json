@@ -1,0 +1,48 @@
+{
+    "watchAnyDevice": "Watch on any device",
+    "streamAnywhere": "Stream on your phone, tablet, laptop and TV without paying more",
+    
+    "upload": "Upload your own movies",
+    "abilityposting": "Ability of posting your personal short movies with embedded links",
+    
+    "findfavourites": "Find your favourites",
+    "personalizedmovie": "Personalized movie recommendations according to your taste",
+    
+    "howDoIWatch":"How do I watch?",
+    "membersSubscribe":"Members that join Reel Jet can watch here in the app",
+    
+    "language": "EN",
+    "getStarted":"Get Started",
+
+
+    "noavatar":"No Avatar",
+    "logout":"Log Out",
+    "noitemsfound":"No items found",
+    "signin":"Sign In",
+    "donthaveaccount":"Don't have an account? Sign up",
+
+    "usernameInput":"Username",
+    "firstname-text":"First Name",
+    "lastname-text":"Last Name",
+    "confirm-password-text":"Confirm Password",
+    "passwordInput":"Password",
+    "emailInput":"Email address",
+    "signup":"Sign Up",
+    "alreadyhas":"Already have an account? Sign in",
+    "more":"more",
+    "play":"Play",
+    "similar":"Similar",
+    "movies":"Movies",
+    "tvshows":"TV Shows",
+    "mylist":"+ My List",
+    "actors":"Actors",
+    "welcome":"Welcome",
+    "resultsfor":"Results for",
+    "trendingmovies":"Upcoming Movies",
+    "trendingshows":"Trending TV Shows",
+    "searchquery":"Search for Movies,TV Shows or Actors",
+    "min":"min",
+    "favourites-add-ok":"Movie added to your favourites successfully",
+    "favourites-add-fail":"Movie is already in favourites",
+    "must-be-logged-in-text":"You must be logged in to perform this action"
+}
