@@ -42,5 +42,8 @@
     "must-be-logged-in-text": "Вы должны войти в систему, чтобы выполнить это действие",
     "firstname-text": "Имя",
     "lastname-text": "Фамилия",
-    "confirm-password-text": "Подтвердите пароль"
+    "confirm-password-text": "Подтвердите пароль",
+    "languageSettings":"Язык",
+    "switchAppearence":"Переключить внешний вид",
+    "darkMode":"Темный режим"
 }

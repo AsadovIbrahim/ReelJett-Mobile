@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useMMKVString } from 'react-native-mmkv'
+import { useMMKVString,useMMKVBoolean } from 'react-native-mmkv'
 import { useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import ReelJettLogo from "../../../assets/icons/reeljettlogo.svg"
@@ -12,6 +12,8 @@ const HomeHeader = () => {
   const [username]=useMMKVString("username");
   const navigation=useNavigation();
   const { t }=useTranslation();
+  const [isDarkMode] = useMMKVBoolean("darkMode");
+
 
   return (
 
@@ -29,10 +31,10 @@ const HomeHeader = () => {
     // </View>
   
   
-    <View className='w-full flex-row justify-between items-center pt-7 p-5 bg-[#252631]'>
+    <View style={{backgroundColor: isDarkMode ? '#252631' : '#ffffff',}} className='w-full flex-row justify-between items-center pt-7 p-5 bg-[#252631]'>
       <View className='items-center flex-row gap-4'>
         <ReelJettLogo/>
-        <Text className='text-white font-extrabold text-4xl'>ReelJett</Text>
+        <Text style={{color: isDarkMode ? '#fff' : '#000',}} className='text-white font-extrabold text-4xl'>ReelJett</Text>
       </View>
       
 
@@ -41,7 +43,7 @@ const HomeHeader = () => {
       
       <TouchableOpacity onPress={()=>{
         navigation.navigate("Search",{screen:"Screen"})}}>
-        <FontAwesomeIcon icon={faSearch} color='white' size={24}></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faSearch} color={isDarkMode?"white":"black"} size={24}></FontAwesomeIcon>
       </TouchableOpacity>
       </View>
     </View>

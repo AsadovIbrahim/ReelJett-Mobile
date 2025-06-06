@@ -2,7 +2,7 @@ import React from 'react';
 import { useState,useEffect,useCallback } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { Alert,Text,View, ScrollView, TouchableOpacity } from "react-native";
-import { useMMKVString } from 'react-native-mmkv';
+import { useMMKVString,useMMKVBoolean } from 'react-native-mmkv';
 import YoutubePlayer from "react-native-youtube-iframe";
 import Similar from './components/Similar';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +23,7 @@ const Details = () => {
     const route=useRoute();
     const {id,type,item}=route.params
     const { t }=useTranslation()
+    const [isDarkMode] = useMMKVBoolean("darkMode");
     const [selectedLanguage, setSelectedLanguage] = useMMKVString("selectedLanguage");
 
 
@@ -60,7 +61,7 @@ const Details = () => {
     }, [id,type])
     
   return (
-    <ScrollView style={{paddingBottom:40}} className='bg-[black]'>
+    <ScrollView style={{paddingBottom:40,flex: 1, backgroundColor: isDarkMode ? 'black' : '#ffffff'}} className='bg-[black]'>
       <YoutubePlayer
         height={240}
         play={playing}
@@ -68,13 +69,13 @@ const Details = () => {
         onChangeState={onStateChange}
       />
       <View className='px-3'>
-        <Text className='text-white text-3xl font-extrabold mb-2 mt-3'>{type==="tv"?data.name:item.title}</Text>
+        <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white text-3xl font-extrabold mb-2 mt-3'>{type==="tv"?data.name:item.title}</Text>
         <View className='flex-row gap-5'>
-          <Text className='text-white mb-2 mt-3'>{data.categories}</Text>
+          <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white mb-2 mt-3'>{data.categories}</Text>
           
           <View className='flex-row gap-2 items-center'>
-            <FontAwesomeIcon icon={faClock} color='white' size={14}></FontAwesomeIcon>
-            <Text className='text-white mb-2 mt-3'>{data.runtime} {t("min")}</Text>
+            <FontAwesomeIcon icon={faClock} color={isDarkMode?"white":"black"} size={14}></FontAwesomeIcon>
+            <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white mb-2 mt-3'>{data.runtime} {t("min")}</Text>
           </View>
         
         </View>
@@ -89,7 +90,7 @@ const Details = () => {
         <TouchableOpacity onPress={()=>{
             setViewMore(prevState=>!prevState)
         }}>
-            <Text className='text-white text-lg'>{!viewMore?item.overview?.substring(0,150): item.overview}<Text className='font-bold text-zinc-500'>{!viewMore ?`...${t("more")}`:""}</Text></Text>
+            <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white text-lg'>{!viewMore?item.overview?.substring(0,150): item.overview}<Text className='font-bold text-zinc-500'>{!viewMore ?`...${t("more")}`:""}</Text></Text>
         </TouchableOpacity>
         <Similar id={id} type={type}/>
       </View>

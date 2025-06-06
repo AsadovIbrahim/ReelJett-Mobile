@@ -44,5 +44,8 @@
     "min":"min",
     "favourites-add-ok":"Movie added to your favourites successfully",
     "favourites-add-fail":"Movie is already in favourites",
-    "must-be-logged-in-text":"You must be logged in to perform this action"
+    "must-be-logged-in-text":"You must be logged in to perform this action",
+    "languageSettings":"Language",
+    "switchAppearence":"Switch Appearence",
+    "darkMode":"Dark Mode"
 }

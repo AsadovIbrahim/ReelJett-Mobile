@@ -11,11 +11,11 @@ const TabStack = () => {
   return (
     <Tab.Navigator
       tabBar={
-        ({ state, descriptors, navigation }:any) =>
+        ({ state, navigation }:any) =>
           <TabBar
             state={state}
-            descriptors={descriptors}
             navigation={navigation}
+          
           />
       }
       screenOptions={{ headerShown: false }}>

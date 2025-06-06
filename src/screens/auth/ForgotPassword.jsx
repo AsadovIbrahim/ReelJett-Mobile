@@ -5,10 +5,13 @@ import { ForgotPasswordFetch } from "../../utils/fetchs"
 import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Toast from 'react-native-toast-message'
+import { useMMKVBoolean } from 'react-native-mmkv';
+
 
 const ForgotPassword = () => {
   const navigation = useNavigation()
   const [formData, setFormData] = useState({})
+  const [isDarkMode] = useMMKVBoolean("darkMode");
   const { t } = useTranslation()
 
   const handleInputChange = (name, text) => {
@@ -43,11 +46,12 @@ const ForgotPassword = () => {
     <KeyboardAwareScrollView
       keyboardShouldPersistTaps="handled"
       contentContainerClassName="flex-1"
-      className="bg-[#252631] pt-[100px]"
+      className="pt-[100px]"
+      style={{ backgroundColor: isDarkMode ? '#252631' : '#ffffff' }}
     >
       <View className="px-6 gap-10">
         <View className="items-center mb-6">
-          <Text className="text-white text-4xl font-extrabold mb-2">Forgot Password?</Text>
+          <Text style={{color:isDarkMode?"#ffffff":"#000000"}} className="text-white text-4xl font-extrabold mb-2">Forgot Password?</Text>
           <Text className="text-gray-400 text-base text-center px-2">
             Enter your email address below and we’ll send you a link to reset your password.
           </Text>

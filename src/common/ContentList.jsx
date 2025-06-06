@@ -2,7 +2,7 @@ import { useState,useCallback } from 'react'
 import { Text, View, FlatList, Alert } from 'react-native'
 import ContentCard from './ContentCard'
 import { useTranslation } from 'react-i18next'
-import { useMMKVString } from "react-native-mmkv";
+import { useMMKVString,useMMKVBoolean } from "react-native-mmkv";
 import { GetFavouriteProfessionalMovies, GetNewReleaseMovies, GetSearchedMovies, GetUpcomingMovies , GetTopRatedMovies} from '../utils/fetchs';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -12,6 +12,7 @@ const ContentList = ({searchTerm,searchQuery,type}) => {
   const [isFavourite, setIsFavourite] = useState(false)
   const { t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useMMKVString("selectedLanguage");
+  const [isDarkMode] = useMMKVBoolean("darkMode");
 
   const getData = async () => {
     
@@ -54,7 +55,7 @@ const ContentList = ({searchTerm,searchQuery,type}) => {
   }
 
   const NoItems = () => <View className='w-full h-full items-center justify-center'>
-    <Text>{t("noitemsfound")}</Text>
+      <Text style={{ color: isDarkMode ? '#fff' : '#000' }}>{t("noitemsfound")}</Text>
   </View>
 
   useFocusEffect(
@@ -68,7 +69,7 @@ const ContentList = ({searchTerm,searchQuery,type}) => {
     <>
     <View className='mt-6'>
 
-      <Text className='font-manropeBold text-white font-extrabold text-3xl ml-8 mb-5'>
+      <Text className='font-manropeBold text-white font-extrabold text-3xl ml-8 mb-5' style={{color:isDarkMode ? '#fff' : '#000'}}>
         {(searchTerm?searchTerm:"Searched") +` ${type==="tv"?t("tvshows"):t("movies")}`}</Text>
       <FlatList
         horizontal
