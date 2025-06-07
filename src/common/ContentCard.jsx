@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import {  TouchableOpacity,  Text,  Animated,  Pressable,  Modal } from "react-native";
 import FastImage from "react-native-fast-image";
 import { useNavigation } from "@react-navigation/native";
+import { useMMKVBoolean } from 'react-native-mmkv';
 import { DeleteFromFavourites } from "../utils/fetchs";
 
 const ContentCard = ({ isFavourite, item, type = "movie" }) => {
 
   const navigation = useNavigation();
   const [showInfoBar, setShowInfoBar] = useState(false);
+  const [isDarkMode] = useMMKVBoolean("darkMode");
   const slideAnim = useState(new Animated.Value(200))[0];
 
 
@@ -74,7 +76,7 @@ const ContentCard = ({ isFavourite, item, type = "movie" }) => {
           >
             <Animated.View
               style={{
-                backgroundColor: "#252631",
+                backgroundColor: isDarkMode?"#252631":"white",
                 padding: 20,
                 borderTopLeftRadius: 20,
                 borderTopRightRadius: 20,
@@ -86,7 +88,7 @@ const ContentCard = ({ isFavourite, item, type = "movie" }) => {
                   fontSize: 16,
                   fontWeight: "500",
                   textAlign: "center",
-                  color:"white",
+                  color:isDarkMode?"#ffffff":"black",
                   marginBottom: 16,
                 }}
               >
@@ -117,7 +119,7 @@ const ContentCard = ({ isFavourite, item, type = "movie" }) => {
               <TouchableOpacity onPress={hideInfoBar}>
                 <Text
                   style={{
-                    color: "white",
+                    color:isDarkMode?"#ffffff":"black",
                     fontSize: 14,
                     textAlign: "center",
                     paddingVertical: 8,
