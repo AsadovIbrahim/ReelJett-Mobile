@@ -173,6 +173,38 @@ export const GetMovieDetails = async (id,title,language) => {
     }
 }
 
+export const GetMovieEmbedLink=async(movieid,title,year)=>{
+    try{
+        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetMovieEmbedLink?movieid=${movieid}&title=${title}&year=${year}`);
+        const data=await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+export const SetMovieLikeCount=async(movieid)=>{
+    try{
+        const response= await fetch(base_url + `http://10.0.2.2:5124/api/BaseMovie/SetLikeCount?movieid=${movieid}&isLikeButton=${isLikeButton}`);
+        const data=await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+export const SetMovieViewCount=async(movieid)=>{
+    try{
+        const response= await fetch(base_url + `http://10.0.2.2:5124/api/BaseMovie/SetViewCount?movieid=${movieid}`);
+        const data=await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
 export const GetTrailer = async (id,language) => {
     try {
         const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetTrailer?movieid=${id}&language=${language}`);

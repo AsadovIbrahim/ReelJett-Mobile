@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect,useCallback } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useRoute,useNavigation } from '@react-navigation/native';
 import { Alert,Text,View, ScrollView, TouchableOpacity } from "react-native";
 import { useMMKVString,useMMKVBoolean } from 'react-native-mmkv';
 import YoutubePlayer from "react-native-youtube-iframe";
@@ -18,6 +18,8 @@ const Details = () => {
     const [viewMore,setViewMore]=useState(false);
     const [playing,setPlaying]=useState(false);
     const {token,setToken}=useMMKVString("accessToken");
+    const navigation = useNavigation()
+
     const [data,setData]=useState({});
     const [trailerKey,setTrailerKey]=useState("");
     const route=useRoute();
@@ -79,10 +81,22 @@ const Details = () => {
           </View>
         
         </View>
-        <TouchableOpacity className="rounded-[4px] my-3 flex-row justify-center bg-[#3A3CB3] py-4 items-center gap-2" /*onPress={togglePlaying}*/>
-            <FontAwesomeIcon icon={faPlay} color='white' size={16}></FontAwesomeIcon>
-            <Text className=' text-white font-extrabold text-lg'>{t("play")}</Text>
+        <TouchableOpacity
+            className="rounded-[4px] my-3 flex-row justify-center bg-[#3A3CB3] py-4 items-center gap-2"
+            onPress={() => {
+            const movieToSend = {
+            id: data.id || item.id,
+            original_title: data.original_title || item.original_title || data.title || item.title,
+            title: data.title || item.title,
+            release_date: data.release_date || item.release_date || "2024",
+            };
+            navigation.navigate("MoviePlayer", { movie: movieToSend, trailerKey });
+            }}
+          >
+          <FontAwesomeIcon icon={faPlay} color='white' size={16} />
+          <Text className='text-white font-extrabold text-lg'>{t("play")}</Text>
         </TouchableOpacity>
+
         <TouchableOpacity className="rounded-[4px] my-3 flex-row justify-center bg-[#2E2B2F] py-4 items-center gap-2" onPress={handleAddFavourites}>
             <Text className=' text-white font-extrabold text-lg'>{t("mylist")}</Text>
         </TouchableOpacity>

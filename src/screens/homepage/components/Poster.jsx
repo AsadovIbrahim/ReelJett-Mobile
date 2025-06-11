@@ -49,10 +49,16 @@ const Poster = () => {
       </FastImage>
 
       <View className="w-full absolute bottom-0 left-[27px] flex-row justify-between items-center p-[14px]">
-        <TouchableOpacity className="bg-[#3A3CB3] w-[48%] py-[10px] rounded-[6px] items-center flex-row justify-center gap-1" onPress={()=>{navigation.navigate("Home",{screen:"Details",params:{id:visibleShow.id,type:'tv'}})}}>
-          <FontAwesomeIcon icon={faPlay} color='white' size={16}></FontAwesomeIcon>
+        <TouchableOpacity
+          className="bg-[#3A3CB3] w-[48%] py-[10px] rounded-[6px] items-center flex-row justify-center gap-1"
+          onPress={() => {
+            navigation.navigate("MoviePlayer", { movie: visibleShow })
+          }}
+        >
+          <FontAwesomeIcon icon={faPlay} color="white" size={16} />
           <Text className="text-[white] text-xl font-extrabold">{t("play")}</Text>
         </TouchableOpacity>
+
         <TouchableOpacity className="bg-[#2E2B2F] w-[48%] py-[10px] rounded-[6px]" onPress={handleAddFavourites}>
           <Text className="text-white text-xl font-extrabold text-center">{t("mylist")}</Text>
         </TouchableOpacity>
