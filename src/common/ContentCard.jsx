@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useMMKVBoolean } from 'react-native-mmkv';
 import { DeleteFromFavourites } from "../utils/fetchs";
 
-const ContentCard = ({ isFavourite, item, type = "movie" }) => {
+const ContentCard = ({ refreshParent,isFavourite, item, type = "movie" }) => {
 
   const navigation = useNavigation();
   const [showInfoBar, setShowInfoBar] = useState(false);
@@ -36,6 +36,7 @@ const ContentCard = ({ isFavourite, item, type = "movie" }) => {
   const handleDelete = async () => {
     await DeleteFromFavourites(item.id)
     hideInfoBar();
+    refreshParent?.();
   };
 
   return (

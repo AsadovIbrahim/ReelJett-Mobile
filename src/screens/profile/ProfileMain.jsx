@@ -15,16 +15,9 @@ const ProfileMain = ( {navigation} ) => {
 
     return (
       <View className='bg-[#252631] h-[100%]' style={{ backgroundColor: isDarkMode ? '#252631' : '#ffffff' }}>
-        <TouchableOpacity className='flex-row p-5 mt-24 items-center justify-between' onPress={() => navigation.navigate('Watchlist')}>
-          <View className='flex-row gap-5 items-center'>
-            <FontAwesomeIcon icon={faBookmark}  color={isDarkMode?"white":"black"} size={20}/>
-            <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-2xl text-white font-light'>Watchlist</Text>
-          </View>
-          <FontAwesomeIcon icon={faAngleRight} color={isDarkMode?"white":"black"} size={20}/>
+        
 
-        </TouchableOpacity>
-
-        <TouchableOpacity className='flex-row p-5 items-center justify-between' onPress={() => navigation.navigate('History')}>
+        <TouchableOpacity className='flex-row  mt-24 p-5 items-center justify-between' onPress={() => navigation.navigate('History')}>
           <View className='flex-row gap-5 items-center'>
             <FontAwesomeIcon icon={faHistory} color={isDarkMode?"white":"black"} size={20}/>
             <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-2xl text-white font-light'>History</Text>

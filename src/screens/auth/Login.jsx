@@ -27,6 +27,7 @@ const Login = () => {
     if (data) {
       storage.set("accessToken", data.accessToken.token)
       storage.set("username", formData.username)
+      storage.set("profilePhoto",data.profilePhoto)
     }
   }
 

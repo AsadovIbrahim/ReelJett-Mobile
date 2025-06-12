@@ -1,6 +1,10 @@
+const VITE_BASE_URL="http://10.0.2.2:5124/api"
+
+
+
 export const GetNewReleaseMovies = async (page,moviesPerPage,selectedLanguage) => {
     try {
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetNewReleaseMovies?page=${page}&moviesPerPage=${moviesPerPage}&language=${selectedLanguage}`)
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetNewReleaseMovies?page=${page}&moviesPerPage=${moviesPerPage}&language=${selectedLanguage}`)
         const data = await response.json()
         return data;
     }  
@@ -11,7 +15,7 @@ export const GetNewReleaseMovies = async (page,moviesPerPage,selectedLanguage) =
 
 export const GetUpcomingMovies = async (selectedLanguage) => {
     try {
-        const response = await fetch(`http://10.0.2.2:5124/api/Movie/GetUpcomingMovies?language=${selectedLanguage}`)
+        const response = await fetch(`${VITE_BASE_URL}/Movie/GetUpcomingMovies?language=${selectedLanguage}`)
         const data = await response.json()
         return data;
     }  
@@ -22,7 +26,7 @@ export const GetUpcomingMovies = async (selectedLanguage) => {
 
 export const GetTopRatedMovies = async (selectedLanguage) => {
     try {
-        const response = await fetch(`http://10.0.2.2:5124/api/Movie/GetTopRatedMovies?language=${selectedLanguage}`)
+        const response = await fetch(`${VITE_BASE_URL}/Movie/GetTopRatedMovies?language=${selectedLanguage}`)
         const data = await response.json()
         return data;
     }  
@@ -33,7 +37,7 @@ export const GetTopRatedMovies = async (selectedLanguage) => {
 
 export const GetSearchedMovies = async (searchQuery,page,moviesPerPage,selectedLanguage) => {
     try {
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetSearchedMovie?query=${searchQuery}&page=${page}&moviesPerPage=${moviesPerPage}&language=${selectedLanguage}`)
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetSearchedMovie?query=${searchQuery}&page=${page}&moviesPerPage=${moviesPerPage}&language=${selectedLanguage}`)
         const data = await response.json()
         return data;
     }  
@@ -44,7 +48,7 @@ export const GetSearchedMovies = async (searchQuery,page,moviesPerPage,selectedL
 
 export const GetSearchedPerson = async (searchQuery,page,personPerPage,selectedLanguage) => {
     try {
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetSearchedPerson?query=${searchQuery}&page=${page}&personPerPage=${personPerPage}&language=${selectedLanguage}`)
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetSearchedPerson?query=${searchQuery}&page=${page}&personPerPage=${personPerPage}&language=${selectedLanguage}`)
         const data = await response.json()
         return data;
     }  
@@ -56,7 +60,7 @@ export const GetSearchedPerson = async (searchQuery,page,personPerPage,selectedL
 export const GetFavouriteProfessionalMovies = async () => {
     try {
 
-        response=await fetch("http://10.0.2.2:5124/api/Favourite/GetFavouriteProfessionalMovies");
+        response=await fetch(`${VITE_BASE_URL}/Favourite/GetFavouriteProfessionalMovies`);
         const data = await response.json()
         let movieList=[]
         
@@ -84,10 +88,12 @@ export const GetFavouriteProfessionalMovies = async () => {
 }
 
 
+
+
 export const LoginFetch = async (formData) => {
     try {
 
-        const response = await fetch("http://10.0.2.2:5124/api/Auth/Login", {
+        const response = await fetch(`${VITE_BASE_URL}/Auth/Login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +115,7 @@ export const LoginFetch = async (formData) => {
 export const RegisterFetch = async (formData) => {
     try {
 
-        const response = await fetch("http://10.0.2.2:5124/api/Auth/Register", {
+        const response = await fetch(`${VITE_BASE_URL}/Auth/Register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -128,7 +134,7 @@ export const RegisterFetch = async (formData) => {
 
 export const ForgotPasswordFetch=async(formData)=>{
     try{
-        const response=await fetch("http://10.0.2.2:5124/api/Auth/ForgotPassword",{
+        const response=await fetch(`${VITE_BASE_URL}/Auth/ForgotPassword`,{
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
@@ -150,9 +156,41 @@ export const ForgotPasswordFetch=async(formData)=>{
   }
 }
 
+
+export const GetAccountData = async () => {
+    try {
+        const response = await fetch(`${VITE_BASE_URL}/Account/GetAccountData`)
+        const data = await response.json()
+        return data;
+    }  
+    catch(error) {
+        console.error(error)
+    }
+}
+
+export const UpdateAccount = async (formData) => {
+    try {
+
+        const response = await fetch(`${VITE_BASE_URL}/Account/UpdateAccount`, {
+            method: "PUT",
+            headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            },
+            body: JSON.stringify(formData)
+        })
+
+        const data = await response.json()
+        return data;
+    }  
+    catch(error) {
+        console.error(error)
+    }
+}
+
 export const GetSimilarMovies = async (id,language) => {
     try {
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetInterestedMovies?movieid=${id}&language=${language}}`);
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetInterestedMovies?movieid=${id}&language=${language}}`);
         const data = await response.json()
         return data;
     }  
@@ -164,7 +202,7 @@ export const GetSimilarMovies = async (id,language) => {
 
 export const GetMovieDetails = async (id,title,language) => {
     try {
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetMovieDetails?movieid=${id}&title=${title}&language=${language}`);
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetMovieDetails?movieid=${id}&title=${title}&language=${language}`);
         const data = await response.json()
         return data;
     }  
@@ -173,41 +211,9 @@ export const GetMovieDetails = async (id,title,language) => {
     }
 }
 
-export const GetMovieEmbedLink=async(movieid,title,year)=>{
-    try{
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetMovieEmbedLink?movieid=${movieid}&title=${title}&year=${year}`);
-        const data=await response.json();
-        return data;
-    }
-    catch(error){
-        console.error(error);
-    }
-}
-
-export const SetMovieLikeCount=async(movieid)=>{
-    try{
-        const response= await fetch(base_url + `http://10.0.2.2:5124/api/BaseMovie/SetLikeCount?movieid=${movieid}&isLikeButton=${isLikeButton}`);
-        const data=await response.json();
-        return data;
-    }
-    catch(error){
-        console.error(error);
-    }
-}
-export const SetMovieViewCount=async(movieid)=>{
-    try{
-        const response= await fetch(base_url + `http://10.0.2.2:5124/api/BaseMovie/SetViewCount?movieid=${movieid}`);
-        const data=await response.json();
-        return data;
-    }
-    catch(error){
-        console.error(error);
-    }
-}
-
 export const GetTrailer = async (id,language) => {
     try {
-        const response=await fetch(`http://10.0.2.2:5124/api/Movie/GetTrailer?movieid=${id}&language=${language}`);
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetTrailer?movieid=${id}&language=${language}`);
         const data = await response.text()
         return data;
     }  
@@ -218,7 +224,7 @@ export const GetTrailer = async (id,language) => {
 
 export const AddToFavourites = async (id) => {
     try {
-        const response = await fetch(`http://10.0.2.2:5124/api/Favourite/AddToFavourites?movieId=${id}`, {
+        const response = await fetch(`${VITE_BASE_URL}/Favourite/AddToFavourites?movieId=${id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -235,7 +241,7 @@ export const AddToFavourites = async (id) => {
 
 export const DeleteFromFavourites = async (movieid) => {
     try {
-        const response = await fetch(`http://10.0.2.2:5124/api/Favourite/DeleteFromFavourites?movieId=${movieid}`, {
+        const response = await fetch(`${VITE_BASE_URL}/Favourite/DeleteFromFavourites?movieId=${movieid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -246,4 +252,48 @@ export const DeleteFromFavourites = async (movieid) => {
         console.error(error)
     }
     
+}
+
+export const GetMovieEmbedLink=async(movieid,title,year)=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetMovieEmbedLink?movieid=${movieid}&title=${title}&year=${year}`);
+        const data=await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+export const SetLikeCount = async (movieid, isLikeButton) => {
+    try {
+        const response = await fetch(`${VITE_BASE_URL}/api/BaseMovie/SetLikeCount?movieid=${movieid}&isLikeButton=${isLikeButton}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            }
+        });
+        const data=await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const SetViewCount=async(movieid)=>{
+    try{
+        const response= await fetch(`${VITE_BASE_URL}/api/BaseMovie/SetViewCount?movieid=${movieid}`,{
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            }
+        });
+        const data=await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
 }

@@ -47,5 +47,7 @@
     "must-be-logged-in-text":"You must be logged in to perform this action",
     "languageSettings":"Language",
     "switchAppearence":"Switch Appearence",
-    "darkMode":"Dark Mode"
+    "darkMode":"Dark Mode",
+
+    "loading":"Loading.."
 }

@@ -12,6 +12,8 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay'
 import { GetMovieDetails } from '../../utils/fetchs';
 import { GetTrailer } from '../../utils/fetchs';
 import { AddToFavourites } from '../../utils/fetchs';
+import Toast from 'react-native-toast-message'
+
 
 
 const Details = () => {
@@ -45,9 +47,36 @@ const Details = () => {
 
     const handleAddFavourites = async() => {
       const data=await AddToFavourites(id)
-      if(data==200) Alert.alert(t("favourites-add-ok"))
-      else if(data == 409) Alert.alert(t('favourites-add-fail'));
-      else if(data==401) Alert.alert(t('must-be-logged-in-text'))  
+      if(data==200){
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: t("favourites-add-ok"),
+          position: 'top',
+          visibilityTime: 3000,
+          topOffset: 50,
+        })
+      }
+      else if(data == 409) {
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: t('favourites-add-fail'),
+          position: 'top',
+          visibilityTime: 3000,
+          topOffset: 50,
+        })
+      }
+      else if(data==401) {
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: t('must-be-logged-in-text'),
+          position: 'top',
+          visibilityTime: 3000,
+          topOffset: 50,
+        })
+      }
     };
     
     const getTrailersById=async()=>{

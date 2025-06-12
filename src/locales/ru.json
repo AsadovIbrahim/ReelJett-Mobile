@@ -45,5 +45,7 @@
     "confirm-password-text": "Подтвердите пароль",
     "languageSettings":"Язык",
     "switchAppearence":"Переключить внешний вид",
-    "darkMode":"Темный режим"
+    "darkMode":"Темный режим",
+
+    "loading":"Загрузка.."
 }
