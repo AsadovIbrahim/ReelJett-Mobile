@@ -13,6 +13,7 @@ import { GetMovieDetails } from '../../utils/fetchs';
 import { GetTrailer } from '../../utils/fetchs';
 import { AddToFavourites } from '../../utils/fetchs';
 import Toast from 'react-native-toast-message'
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
@@ -84,12 +85,12 @@ const Details = () => {
       setTrailerKey(data.split("/embed/")[1]);       
     }
 
-    useEffect(() => {
-        getDataById()
-        getTrailersById()
-      return () => {
-      }
-    }, [id,type])
+    useFocusEffect(
+        useCallback(() => {
+          getDataById()
+          getTrailersById()
+        }, [id,type])
+    );
     
   return (
     <ScrollView style={{paddingBottom:40,flex: 1, backgroundColor: isDarkMode ? 'black' : '#ffffff'}} className='bg-[black]'>
@@ -113,11 +114,14 @@ const Details = () => {
         <TouchableOpacity
             className="rounded-[4px] my-3 flex-row justify-center bg-[#3A3CB3] py-4 items-center gap-2"
             onPress={() => {
-            const movieToSend = {
-            id: data.id || item.id,
-            original_title: data.original_title || item.original_title || data.title || item.title,
-            title: data.title || item.title,
-            release_date: data.release_date || item.release_date || "2024",
+             const movieToSend = {
+              id:item.id,
+              title:item.title,
+              original_title:item.original_title,
+              release_date:item.release_date || "2025",
+              vote_average: item.vote_average,
+              likeCount:data.likeCount,
+              dislikeCount:data.dislikeCount
             };
             navigation.navigate("MoviePlayer", { movie: movieToSend, trailerKey });
             }}
@@ -142,4 +146,3 @@ const Details = () => {
 }
 
 export default Details
-

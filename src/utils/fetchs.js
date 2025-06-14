@@ -1,4 +1,5 @@
 const VITE_BASE_URL="http://10.0.2.2:5124/api"
+// const VITE_BASE_URL="https://10.0.2.2:7109/api"
 
 
 
@@ -256,7 +257,7 @@ export const DeleteFromFavourites = async (movieid) => {
 
 export const GetMovieEmbedLink=async(movieid,title,year)=>{
     try{
-        const response=await fetch(`${VITE_BASE_URL}/Movie/GetMovieEmbedLink?movieid=${movieid}&title=${title}&year=${year}`);
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetMovieEmbedLink?movieId=${movieid}&title=${title}&year=${year}`);
         const data=await response.json();
         return data;
     }
@@ -267,11 +268,10 @@ export const GetMovieEmbedLink=async(movieid,title,year)=>{
 
 export const SetLikeCount = async (movieid, isLikeButton) => {
     try {
-        const response = await fetch(`${VITE_BASE_URL}/api/BaseMovie/SetLikeCount?movieid=${movieid}&isLikeButton=${isLikeButton}`, {
+        const response = await fetch(`${VITE_BASE_URL}/BaseMovie/SetLikeCount?movieid=${movieid}&isLikeButton=${isLikeButton}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Accept': 'application/json',
             }
         });
         const data=await response.json();
@@ -283,14 +283,13 @@ export const SetLikeCount = async (movieid, isLikeButton) => {
 
 export const SetViewCount=async(movieid)=>{
     try{
-        const response= await fetch(`${VITE_BASE_URL}/api/BaseMovie/SetViewCount?movieid=${movieid}`,{
+        const response= await fetch(`${VITE_BASE_URL}/BaseMovie/SetViewCount?movieid=${movieid}`,{
             method:'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Accept': 'application/json',
             }
         });
-        const data=await response.json();
+        const data=await response.text();
         return data;
     }
     catch(error){

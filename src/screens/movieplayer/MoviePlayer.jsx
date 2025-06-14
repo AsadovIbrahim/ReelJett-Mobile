@@ -6,6 +6,7 @@ import { useMMKVBoolean } from 'react-native-mmkv';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faThumbsUp, faThumbsDown, faEye } from '@fortawesome/free-solid-svg-icons';
 import { GetMovieEmbedLink, SetLikeCount, SetViewCount } from '../../utils/fetchs'; // Bu funksiyalar utils-dədirsə belə import et
+import LikeButton from './components/LikeButton';
 
 const fallbackLink = "https://streambucket.net/?play=SW1HV1NUZUcxTWdkNDd2QVRGb0tTaXFTVStiSXNRdkNNcXVqOWtRdGljYU5nQ1JNd21GbWdVeTN5anE2RG1rN2RMSVcvT09YSVo1V0pHbzZjNlhLN2F4MDNZaWhzN2hDUDhRV1dtMFRoUnl4d0YyNFJWQVRlOTAvLzBEay9ZODZwOFdFQnJYUTYvUWRGVjJNQ0ZqbndURzY5QT09"; // fallback link qısaldılıb
 
@@ -19,9 +20,6 @@ const MoviePlayer = () => {
   const [altyazi, setAltyazi] = useState(null);
   const [multiple, setMultiple] = useState(null);
   const [embedLink, setEmbedLink] = useState(null);
-  const [likes, setLikes] = useState(movie.likesCount || 0);
-  const [dislikes, setDislikes] = useState(movie.dislikesCount || 0);
-  const [isLiked, setIsLiked] = useState(null);
 
   const [isDarkMode] = useMMKVBoolean("darkMode");
 
@@ -66,29 +64,12 @@ const MoviePlayer = () => {
       SetViewCount(movie.id);
     }
   }, []);
-
-  const handleLikeDislike = async (type) => {
-    if (isLiked === type) return;
-
-    const isLikeButton = type === 'like';
-    const result = await SetLikeCount(movie.id, isLikeButton);
-
-    if (result) {
-      if (isLikeButton) {
-        setLikes(prev => prev + 1);
-        if (isLiked === 'dislike') setDislikes(prev => prev - 1);
-      } else {
-        setDislikes(prev => prev + 1);
-        if (isLiked === 'like') setLikes(prev => prev - 1);
-      }
-      setIsLiked(type);
-    }
-  };
+  
 
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center bg-black">
-        <ActivityIndicator size="large" color="white" />
+        <ActivityIndicator size="large" color={isDarkMode?"white":"black"} />
         <Text className="text-white mt-4 text-base">Loading...</Text>
       </View>
     );
@@ -108,7 +89,7 @@ const MoviePlayer = () => {
       <View className="flex-row justify-between items-center px-4 py-3">
         <View>
           <Text style={{ color: isDarkMode ? "white" : "black" }} className="text-3xl font-bold">
-            {movie.original_title}
+            {movie.title}
           </Text>
           <Text className="text-gray-400 text-2sm">{movie.release_date?.substring(0, 4)}</Text>
         </View>
@@ -151,15 +132,7 @@ const MoviePlayer = () => {
       </View>
 
       <View className="flex-row items-center justify-start ms-1 gap-5 px-4 py-2">
-        <TouchableOpacity onPress={() => handleLikeDislike('like')} className="gap-1 flex-row items-center space-x-1">
-          <FontAwesomeIcon  icon={faThumbsUp} size={20} color={isLiked === 'like' ? '#3A3CB3' : 'gray'} />
-          <Text style={{ color: isDarkMode ? "white" : "black" }}>{likes}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleLikeDislike('dislike')} className="gap-1 flex-row items-center space-x-1">
-          <FontAwesomeIcon icon={faThumbsDown} size={20} color={isLiked === 'dislike' ? '#3A3CB3' : 'gray'} />
-          <Text style={{ color: isDarkMode ? "white" : "black" }}>{dislikes}</Text>
-        </TouchableOpacity>
+        <LikeButton movieId={movie.id} initialLike={movie.likeCount} initialDislike={movie.dislikeCount}></LikeButton>
 
         <View className="flex-row items-center space-x-1 gap-1">
           <FontAwesomeIcon icon={faEye}  size={20} color="gray" />

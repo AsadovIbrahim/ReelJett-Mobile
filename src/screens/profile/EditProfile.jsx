@@ -1,3 +1,4 @@
+
 import { View , TextInput , Button } from "react-native"
 import { useEffect, useState } from 'react';
 import { useMMKVString,useMMKVBoolean } from 'react-native-mmkv';
@@ -129,7 +130,7 @@ const EditProfile = () => {
 
 
     return (
-        <KeyboardAwareScrollView style={{backgroundColor:isDarkMode?"#252631":"white"}} keyboardShouldPersistTaps="handled" contentContainerClassName='flex-1 justify-center' className='bg-[#252631]'>
+        <KeyboardAwareScrollView style={{backgroundColor:isDarkMode?"#252631":"white"}} keyboardShouldPersistTaps="handled" >
                 
             <View className='p-6 gap-8'>
 
@@ -150,17 +151,17 @@ const EditProfile = () => {
 
 
 
-                <TextInput value={firstname} onChangeText={text => handleInputChange("firstname", text)} placeholder={t("firstname-text")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 border-r-white rounded-[5px] text-[14px]'
+                <TextInput value={firstname} onChangeText={text => handleInputChange("firstname", text)} placeholder={t("firstname-text")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 rounded-[5px] text-[14px]'
                     style={{
                       borderColor: borderColor,
                       color: textColor,
                     }} />
-                <TextInput value={lastname} onChangeText={text => handleInputChange("lastname", text)} placeholder={t("lastname-text")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 border-r-white rounded-[5px] text-[14px]'
+                <TextInput value={lastname} onChangeText={text => handleInputChange("lastname", text)} placeholder={t("lastname-text")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 rounded-[5px] text-[14px]'
                     style={{
                         borderColor: borderColor,
                         color: textColor,
                     }} />
-                <TextInput value={email} onChangeText={text => handleInputChange("email", text)} placeholder={t("emailInput")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 border-r-white rounded-[5px] text-[14px]'
+                <TextInput value={email} onChangeText={text => handleInputChange("email", text)} placeholder={t("emailInput")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 rounded-[5px] text-[14px]'
                     style={{
                         borderColor: borderColor,
                         color: textColor,
@@ -173,7 +174,7 @@ const EditProfile = () => {
                     placeholder={t("passwordInput")}
                     placeholderTextColor="#BCBCBC"
                     secureTextEntry={!showPassword}
-                    className='border h-[57px] bg-[transparent] pl-3 pr-12 border-r-white rounded-[5px] text-[14px]'
+                    className='border h-[57px] bg-[transparent] pl-3 pr-12 rounded-[5px] text-[14px]'
                     style={{
                         borderColor: borderColor,
                         color: textColor,
@@ -183,7 +184,7 @@ const EditProfile = () => {
                     <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} color='white' />
                     </TouchableOpacity>
                 </View>
-                <TextInput value={username} onChangeText={text => handleInputChange("username", text)} placeholder={t("usernameInput")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 border-r-white rounded-[5px] text-[14px]'
+                <TextInput value={username} onChangeText={text => handleInputChange("username", text)} placeholder={t("usernameInput")} placeholderTextColor="#BCBCBC" className='border h-[57px] bg-[transparent] pl-3 rounded-[5px] text-[14px]'
                     style={{
                         borderColor: borderColor,
                         color: textColor,

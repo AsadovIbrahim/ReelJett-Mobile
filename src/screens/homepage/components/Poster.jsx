@@ -8,8 +8,12 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay'
-import { useMMKVString } from "react-native-mmkv";
+import { useMMKVBoolean, useMMKVString } from "react-native-mmkv";
 import { AddToFavourites, GetUpcomingMovies } from "../../../utils/fetchs"
+import Toast from "react-native-toast-message"
+import { GetMovieDetails } from "../../../utils/fetchs"
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from "react"
 
 
 const Poster = () => {
@@ -17,30 +21,61 @@ const Poster = () => {
   const { t }=useTranslation()
   const navigation=useNavigation()
   const [selectedLanguage, setSelectedLanguage] = useMMKVString("selectedLanguage");
-  
+  const [isDarkMode] = useMMKVBoolean("darkMode");
+  const [details,setDetails]=useState()
 
   const getShowData = async() =>{
     const data=await GetUpcomingMovies(selectedLanguage)
     setVisibleShow(data.movies[0])
+    const detaileddata=await GetMovieDetails(visibleShow.id,visibleShow.title,selectedLanguage)
+    setDetails(detaileddata)
   }
   
   const handleAddFavourites = async() => {
-        const data=await AddToFavourites(id)
-        if(data==200) Alert.alert(t("favourites-add-ok"))
-        else if(data == 409) Alert.alert(t('favourites-add-fail'));
-        else if(data==401) Alert.alert(t('must-be-logged-in-text'))  
-  };
+        const data=await AddToFavourites(visibleShow.id)
+        if(data==200){
+          Toast.show({
+            type: 'success',
+            text1: 'Success',
+            text2: t("favourites-add-ok"),
+            position: 'top',
+            visibilityTime: 3000,
+            topOffset: 50,
+          })
+        }
+        else if(data == 409) {
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: t('favourites-add-fail'),
+            position: 'top',
+            visibilityTime: 3000,
+            topOffset: 50,
+          })
+        }
+        else if(data==401) {
+          Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: t('must-be-logged-in-text'),
+            position: 'top',
+            visibilityTime: 3000,
+            topOffset: 50,
+          })
+        }
+      };
 
 
-
-  useEffect(() => {
-    getShowData()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      getShowData();
+    }, [])
+  )
 
   return (
     
     <View className="w-screen pt-4 px-[27px] relative mb-5 ">
-      <FastImage style={{width:"auto",height:500,backgroundColor:"#15121E",borderRadius:8}} source={{
+      <FastImage style={{width:"auto",height:500,backgroundColor:isDarkMode?"#15121E":"gray",borderRadius:8}} source={{
         uri:`https://image.tmdb.org/t/p/original${visibleShow.poster_path}`,
         priority:FastImage.priority.high
       }}
@@ -52,7 +87,16 @@ const Poster = () => {
         <TouchableOpacity
           className="bg-[#3A3CB3] w-[48%] py-[10px] rounded-[6px] items-center flex-row justify-center gap-1"
           onPress={() => {
-            navigation.navigate("MoviePlayer", { movie: visibleShow })
+            const movieToSend = {
+              id:visibleShow.id,
+              title:visibleShow.title,
+              original_title:visibleShow.original_title,
+              release_date:visibleShow.release_date || "2025",
+              vote_average: visibleShow.vote_average,
+              likeCount:details.likeCount,
+              dislikeCount:details.dislikeCount
+            };  
+            navigation.navigate("MoviePlayer", { movie: movieToSend })
           }}
         >
           <FontAwesomeIcon icon={faPlay} color="white" size={16} />
