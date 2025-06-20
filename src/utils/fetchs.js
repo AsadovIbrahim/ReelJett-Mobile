@@ -296,3 +296,60 @@ export const SetViewCount=async(movieid)=>{
         console.error(error);
     }
 }
+
+export const GetComments = async (movieid)=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/Comment/GetComments?movieid=${movieid}`);
+        const data=await response.json();
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+}
+export const AddComment = async (movieid,content)=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/Comment/AddComment?movieid=${movieid}&content=${content}`,{
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        });
+        const data=await response.json();
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+}
+
+export const LikeComment = async (commentId)=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/Comment/LikeComment?commentid=${commentId}`,{
+            method:'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        });
+        const data=await response.json();
+        return data;
+    }catch(error){
+        console.error(error);
+    }
+}
+
+export const DeleteComment = async (commentId)=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/Comment/DeleteComment?commentid=${commentId}`,{
+            method:'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        });
+         const data=await response.text();
+         console.log(data);
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+

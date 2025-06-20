@@ -47,5 +47,9 @@
     "switchAppearence":"Переключить внешний вид",
     "darkMode":"Темный режим",
 
-    "loading":"Загрузка.."
+    "loading":"Загрузка..",
+    "add-comment-text": "Добавить комментарий...",
+
+    "comment-text": "Комментариев"
+
 }

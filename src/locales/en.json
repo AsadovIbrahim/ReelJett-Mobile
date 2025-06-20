@@ -49,5 +49,9 @@
     "switchAppearence":"Switch Appearence",
     "darkMode":"Dark Mode",
 
-    "loading":"Loading.."
+    "loading":"Loading..",
+
+    "add-comment-text":"Add a comment...",
+    "comment-text": "Comments"
+
 }

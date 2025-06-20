@@ -1,6 +1,5 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark'
 import { faHistory } from '@fortawesome/free-solid-svg-icons/faHistory'
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit'
 import { faGear } from '@fortawesome/free-solid-svg-icons/faGear'
