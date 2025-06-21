@@ -63,7 +63,7 @@ const Comments = ({ movieId }) => {
         />
         <View className="flex-1 flex-row border border-gray-300 rounded-lg px-3 items-center">
           <TextInput
-            className="flex-1 h-20 text-base text-white"
+            className="flex-1 h-15 text-base text-white"
             value={commentContent}
             onChangeText={setCommentContent}
             placeholder={
