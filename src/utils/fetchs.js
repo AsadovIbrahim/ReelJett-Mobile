@@ -92,24 +92,35 @@ export const GetFavouriteProfessionalMovies = async () => {
 
 
 export const LoginFetch = async (formData) => {
-    try {
-        const response = await fetch(`${VITE_BASE_URL}/Auth/Login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(formData)
-        })
+  try {
+    const response = await fetch(`${VITE_BASE_URL}/Auth/Login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-        const data = await response.json()
-        console.log(data)
-        return data;
-    }  
-    catch(error) {
-        console.error(error)
+    const contentType = response.headers.get("Content-Type");
+    let data;
+
+    if (contentType && contentType.includes("application/json")) {
+      data = await response.json();
+    } else {
+      const message = await response.text();
+      data = { success: false, message };
     }
-}
+
+    if (!response.ok) {
+      return { success: false, message: data.message || 'Invalid username or password.' };
+    }
+    return { success: true, ...data };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: "Server error occurred." };
+  }
+};
 
 
 export const RegisterFetch = async (formData) => {
@@ -124,12 +135,18 @@ export const RegisterFetch = async (formData) => {
         body: JSON.stringify(formData)
         })
 
-        const data = await response.json()
-        return data;
+        const text = await response.text()
+        if(response.ok){
+            return{success:true,message:text};
+        }else{
+            return{success:false,message:text};
+        }
+
+
     }  
     catch(error) {
-        console.error(error)
-    }
+        console.error(error);
+    return { success: false, message: "Server error occurred." };    }
 }
 
 export const ForgotPasswordFetch=async(formData)=>{
