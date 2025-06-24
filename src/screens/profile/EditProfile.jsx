@@ -1,4 +1,3 @@
-
 import { View , TextInput , Button } from "react-native"
 import { useEffect, useState } from 'react';
 import { useMMKVString,useMMKVBoolean } from 'react-native-mmkv';
@@ -15,6 +14,7 @@ import { Image } from "react-native";
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native'
 import RNFS from 'react-native-fs';
+import Toast from "react-native-toast-message";
 
 const EditProfile = () => {
 
@@ -31,8 +31,8 @@ const EditProfile = () => {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
     const [imageUri, setImageUri] = useState();
-    const [binaryImages, setBinaryImages] = useState("");
-    
+    const [profilePhotoBase64, setProfilePhotoBase64] = useState(null);
+
     const [isDarkMode] = useMMKVBoolean("darkMode");
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const EditProfile = () => {
         setEmail(accountData.email)
         setUsername(accountData.username)
         setPassword(accountData.password)
-        setImageUri(storage.getString("profilePhoto"))
+        setImageUri(accountData.profilePhoto)
     };
 
 
@@ -103,29 +103,54 @@ const EditProfile = () => {
     }
 
     const handleUpdate = async() => {
-        const data= await UpdateAccount(accountData);
-        storage.set("username",accountData.username)
-        storage.set("profilePhoto",imageUri)
+        const updatedAccount = {
+            ...accountData,
+            profilePhoto: profilePhotoBase64
+        };
+        const data=await UpdateAccount(updatedAccount);
+        if(data=="Succeded") {
+            storage.set("username",accountData.username)
+            storage.set("profilePhoto",imageUri)
+            Toast.show({
+                type: 'success',
+                text1: 'Success',
+                position: 'top',
+                visibilityTime: 3000,
+                topOffset: 50,
+            })
+        }
+        else {
+            Toast.show({
+                type: 'error',
+                text1: 'Error',
+                position: 'top',
+                visibilityTime: 3000,
+                topOffset: 50,
+            })
+        }
+        
         
     };
     
-    const pickImage = async () => {
+    const pickImage = () => {
         launchImageLibrary({ mediaType: 'photo' }, async (response) => {
-        if (response.didCancel || response.errorCode || !response.assets?.length) return;
+            if (response.didCancel || response.errorCode || !response.assets?.length) return;
 
-        const asset = response.assets[0];
-        const uri = asset.uri.startsWith('file://') ? asset.uri : `file://${asset.uri}`;
-        setImageUri(uri);
+            const asset = response.assets[0];
+            const uri = asset.uri.startsWith('file://') ? asset.uri : `file://${asset.uri}`;
 
-        try {
-            const base64Data = await RNFS.readFile(uri, 'base64');
-            
-            setBinaryImages(base64Data)
-        } catch (err) {
-            console.error('Error reading image file:', err);
-        }
+            setImageUri(uri);
+
+            try {
+                const base64Data = await RNFS.readFile(uri, 'base64');
+                setProfilePhotoBase64(base64Data);
+            } catch (err) {
+                console.error('Error reading image file:', err);
+            }
         });
     };
+
+
 
 
 

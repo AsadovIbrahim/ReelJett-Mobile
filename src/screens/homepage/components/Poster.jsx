@@ -22,13 +22,10 @@ const Poster = () => {
   const navigation=useNavigation()
   const [selectedLanguage, setSelectedLanguage] = useMMKVString("selectedLanguage");
   const [isDarkMode] = useMMKVBoolean("darkMode");
-  const [details,setDetails]=useState()
 
   const getShowData = async() =>{
     const data=await GetUpcomingMovies(selectedLanguage)
     setVisibleShow(data.movies[0])
-    const detaileddata=await GetMovieDetails(visibleShow.id,visibleShow.title,selectedLanguage)
-    setDetails(detaileddata)
   }
   
   const handleAddFavourites = async() => {
@@ -86,7 +83,8 @@ const Poster = () => {
       <View className="w-full absolute bottom-0 left-[27px] flex-row justify-between items-center p-[14px]">
         <TouchableOpacity
           className="bg-[#3A3CB3] w-[48%] py-[10px] rounded-[6px] items-center flex-row justify-center gap-1"
-          onPress={() => {
+          onPress={async () => {
+            const details=await GetMovieDetails(visibleShow.id,visibleShow.title,selectedLanguage)
             const movieToSend = {
               id:visibleShow.id,
               title:visibleShow.title,

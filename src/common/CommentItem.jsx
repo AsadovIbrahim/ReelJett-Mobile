@@ -12,6 +12,7 @@ import { LikeComment, DeleteComment } from "../utils/fetchs";
 import { useTranslation } from "react-i18next";
 import { useMMKVString, useMMKVBoolean } from "react-native-mmkv";
 import { storage } from "../utils/MMKVStore";
+import { Modal } from "react-native";
 
 const CommentItem = ({ comment, refreshParent }) => {
   const { id, profilePhoto, username, content, sendingDate, likeCount } = comment;
@@ -35,10 +36,13 @@ const CommentItem = ({ comment, refreshParent }) => {
     }
   };
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const handleDelete = async () => {
     try {
       await DeleteComment(id);
       refreshParent?.();
+      setShowDeleteModal(false);
     } catch (err) {
       console.log("Delete error:", err);
     }
@@ -50,36 +54,67 @@ const CommentItem = ({ comment, refreshParent }) => {
   const dateText = isDarkMode ? "text-gray-400" : "text-gray-600";
 
   return (
-    <View style={{ backgroundColor }} className="flex-row p-4 rounded-xl mb-3">
-      <Image
-        source={{ uri: profilePhoto }}
-        className="w-10 h-10 rounded-full mr-3"
-      />
-      <View className="flex-1">
-        <View className="flex-row justify-between items-center">
-          <Text className={`font-semibold text-[15px] ${primaryText}`}>{username}</Text>
-          <Text className={`text-[12px] ${dateText}`}>{sendingDate}</Text>
-        </View>
-        <Text className={`text-[14px] mt-1 ${secondaryText}`}>{content}</Text>
-        <View className="flex-row mt-2 justify-between">
-          <TouchableOpacity
-            onPress={handleLike}
-            className="flex-row items-center"
-          >
-            <FontAwesomeIcon icon={faThumbsUp} size={16} color={isDarkMode ? "white" : "#3A3CB3"} />
-            <Text className={`ml-1 ${primaryText}`}>{likeCounter}</Text>
-          </TouchableOpacity>
-          {currentUser === username && (
+    <>
+      <View style={{ backgroundColor }} className="flex-row p-4 rounded-xl mb-3">
+        <Image
+          source={{ uri: profilePhoto }}
+          className="w-10 h-10 rounded-full mr-3"
+        />
+        <View className="flex-1">
+          <View className="flex-row justify-between items-center">
+            <Text className={`font-semibold text-[15px] ${primaryText}`}>{username}</Text>
+            <Text className={`text-[12px] ${dateText}`}>{sendingDate}</Text>
+          </View>
+          <Text className={`text-[14px] mt-1 ${secondaryText}`}>{content}</Text>
+          <View className="flex-row mt-2 justify-between">
             <TouchableOpacity
-              onPress={handleDelete}
-              className="flex-row items-center ml-4"
+              onPress={handleLike}
+              className="flex-row items-center"
             >
-              <FontAwesomeIcon icon={faTrash} size={16} color={isDarkMode ? "white" : "#333"} />
+              <FontAwesomeIcon icon={faThumbsUp} size={16} color={isDarkMode ? "white" : "#3A3CB3"} />
+              <Text className={`ml-1 ${primaryText}`}>{likeCounter}</Text>
             </TouchableOpacity>
-          )}
+            {currentUser === username && (
+              <TouchableOpacity
+                onPress={() => setShowDeleteModal(true)} // open modal
+                className="flex-row items-center ml-4"
+              >
+                <FontAwesomeIcon icon={faTrash} size={16} color={isDarkMode ? "white" : "#333"} />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       </View>
-    </View>
+
+      <Modal
+        visible={showDeleteModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowDeleteModal(false)}
+      >
+        <View className="flex-1 justify-center items-center bg-black/50">
+          <View className={`w-2/3 p-6 rounded-xl ${isDarkMode ? "bg-[#2C2C36]" : "bg-white"}`}>
+            <Text className={`text-lg font-semibold mb-4 ${primaryText}`}>Are you sure you want to delete this comment?</Text>
+            
+            <View className="flex-row justify-between">
+              <TouchableOpacity
+                onPress={handleDelete}
+                className="px-4 py-2 rounded-lg bg-[#3A3CB3]"
+              >
+                <Text className="text-white font-bold">DELETE</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                onPress={() => setShowDeleteModal(false)}
+                className="px-4 py-2 rounded-lg bg-gray-400"
+              >
+                <Text className="text-white font-bold">CANCEL</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 };
 

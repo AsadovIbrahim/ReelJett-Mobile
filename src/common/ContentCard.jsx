@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useMMKVBoolean } from 'react-native-mmkv';
 import { DeleteFromFavourites } from "../utils/fetchs";
 
-const ContentCard = ({ refreshParent,isFavourite, item, type = "movie" }) => {
+const ContentCard = ({ refreshParent,isFavourite, item }) => {
 
   const navigation = useNavigation();
   const [showInfoBar, setShowInfoBar] = useState(false);
@@ -45,7 +45,7 @@ const ContentCard = ({ refreshParent,isFavourite, item, type = "movie" }) => {
         onPress={() =>
           navigation.navigate("Home", {
             screen: "Details",
-            params: { id: item.id, type, item },
+            params: { id: item.id , item },
           })
         }
         onLongPress={handleLongPress}

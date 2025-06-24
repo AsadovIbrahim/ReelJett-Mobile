@@ -93,7 +93,6 @@ export const GetFavouriteProfessionalMovies = async () => {
 
 export const LoginFetch = async (formData) => {
     try {
-
         const response = await fetch(`${VITE_BASE_URL}/Auth/Login`, {
         method: "POST",
         headers: {
@@ -257,7 +256,7 @@ export const DeleteFromFavourites = async (movieid) => {
 
 export const GetMovieEmbedLink=async(movieid,title,year)=>{
     try{
-        const response=await fetch(`${VITE_BASE_URL}/Movie/GetMovieEmbedLink?movieId=${movieid}&title=${title}&year=${year}`);
+        const response=await fetch(`${VITE_BASE_URL}/Movie/GetMovieEmbedLink?movieid=${movieid}&title=${title}&year=${year}`);
         const data=await response.json();
         return data;
     }
@@ -297,6 +296,17 @@ export const SetViewCount=async(movieid)=>{
     }
 }
 
+export const GetAllPersonalMovies=async()=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/PersonalMovie/GetAllPersonalMovies`);
+        const data=await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+    
 export const GetComments = async (movieid)=>{
     try{
         const response=await fetch(`${VITE_BASE_URL}/Comment/GetComments?movieid=${movieid}`);

@@ -8,14 +8,18 @@ import {
   GetNewReleaseMovies,
   GetSearchedMovies,
   GetUpcomingMovies,
+  GetAllPersonalMovies,
   GetTopRatedMovies
 } from '../utils/fetchs';
 import { useFocusEffect } from '@react-navigation/native';
+import Toast from 'react-native-toast-message'
+import PersonalContentCard from '../screens/personalmovie/components/PersonalContentCard';
 
+  
 const ContentList = ({ searchTerm, searchQuery, type }) => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isFavourite, setIsFavourite] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
   const [selectedLanguage] = useMMKVString("selectedLanguage");
   const [isDarkMode] = useMMKVBoolean("darkMode");
@@ -23,30 +27,44 @@ const ContentList = ({ searchTerm, searchQuery, type }) => {
   const getData = async () => {
     setLoading(true);
     try {
-      const page = 1;
-      const moviesPerPage = 20;
-
-      if (searchQuery !== "" && searchTerm == null) {
-        const data = await GetSearchedMovies(searchQuery, page, moviesPerPage, selectedLanguage);
-        setData(data.movies);
-      } else if (searchQuery == null) {
-        if (searchTerm === "Upcoming") {
-          const data = await GetUpcomingMovies(selectedLanguage);
+      if(type==="movie") {
+        const page = 1;
+        const moviesPerPage = 20;
+        if (searchQuery !== "" && searchTerm == null) {
+          const data = await GetSearchedMovies(searchQuery, page, moviesPerPage, selectedLanguage);
           setData(data.movies);
-        } else if (searchTerm === "New Release") {
-          const data = await GetNewReleaseMovies(page, moviesPerPage, selectedLanguage);
-          setData(data.movies);
-        } else if (searchTerm === "Your Favourite") {
-          const data = await GetFavouriteProfessionalMovies();
-          setData(data);
-          setIsFavourite(true);
-        } else if (searchTerm === "Top Rated") {
-          const data = await GetTopRatedMovies(selectedLanguage);
-          setData(data.movies);
+        } 
+        else if (searchQuery == null) {
+          if (searchTerm === "Upcoming") {
+            const data = await GetUpcomingMovies(selectedLanguage);
+            setData(data.movies);
+          } else if (searchTerm === "New Release") {
+            const data = await GetNewReleaseMovies(page, moviesPerPage, selectedLanguage);
+            setData(data.movies);
+          } else if (searchTerm === "Your Favourite") {
+            const data = await GetFavouriteProfessionalMovies();
+            setData(data);
+            setIsFavourite(true);
+          } else if (searchTerm === "Top Rated") {
+            const data = await GetTopRatedMovies(selectedLanguage);
+            setData(data.movies);
+          }
         }
       }
+      else if(type==="video") {
+        const data = await GetAllPersonalMovies();
+        setData(data);
+      }
+      
     } catch (error) {
-      console.log(error);
+        Toast.show({
+            type: 'error',
+            text1: 'Error',
+            text2: error,
+            position: 'top',
+            visibilityTime: 3000,
+            topOffset: 50,
+        })
     } finally {
       setLoading(false);
     }
@@ -83,17 +101,26 @@ const ContentList = ({ searchTerm, searchQuery, type }) => {
         className='font-manropeBold text-white font-extrabold text-3xl ml-8 mb-5'
         style={{ color: isDarkMode ? '#fff' : '#000' }}
       >
-        {(searchTerm ? searchTerm : "Searched") + ` ${type === "tv" ? t("tvshows") : t("movies")}`}
+        {
+        
+        type=="movie"?
+        (searchTerm ? searchTerm : "Searched") +" "+ t("movies")
+        :
+        ""
+        
+        }
       </Text>
 
       <FlatList
-        horizontal
+        horizontal={type === "movie"}
         showsHorizontalScrollIndicator={false}
         ListEmptyComponent={NoItems}
         contentContainerStyle={{ gap: 8, paddingHorizontal: 22 }}
         data={data}
         renderItem={({ item }) => (
-          <ContentCard refreshParent={getData} isFavourite={isFavourite} item={item} type={type} />
+        (
+          type==="movie" ? <ContentCard refreshParent={getData} isFavourite={isFavourite} item={item} type={type} />:<PersonalContentCard item={item}></PersonalContentCard>
+        )
         )}
       />
     </View>

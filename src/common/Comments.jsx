@@ -52,14 +52,14 @@ const Comments = ({ movieId }) => {
 
   return (
     <View style={{padding:20}} className={isDarkMode?"color-black":"color-gray-300"}>
-      <Text className="text-base font-bold mb-2" style={{color:isDarkMode?"white":"black"}}>
+      <Text className="text-lg font-bold mb-2" style={{color:isDarkMode?"white":"black"}}>
         {comments?.length} {t("comment-text")}
       </Text>
 
       <View className="flex-row items-center mb-4">
         <Image
           source={{ uri: imageUri }}
-          className="w-10 h-10 rounded-full mr-3 border border-gray-300"
+          className="w-10 h-10 rounded-full mr-3 border"
         />
         <View className="flex-1 flex-row border border-gray-300 rounded-lg px-3 items-center">
           <TextInput
@@ -72,6 +72,7 @@ const Comments = ({ movieId }) => {
             editable={!!accessToken}
             onSubmitEditing={handleSubmit}
             placeholderTextColor="#999"
+            style={{color:isDarkMode?"white":"black"}}
           />
         </View>
       </View>

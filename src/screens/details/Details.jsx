@@ -22,7 +22,6 @@ const Details = () => {
     const [playing,setPlaying]=useState(false);
     const {token,setToken}=useMMKVString("accessToken");
     const navigation = useNavigation()
-
     const [data,setData]=useState({});
     const [trailerKey,setTrailerKey]=useState("");
     const route=useRoute();
@@ -87,6 +86,7 @@ const Details = () => {
 
     useFocusEffect(
         useCallback(() => {
+          console.log(item);
           getDataById()
           getTrailersById()
         }, [id,type])
@@ -114,7 +114,7 @@ const Details = () => {
         <TouchableOpacity
             className="rounded-[4px] my-3 flex-row justify-center bg-[#3A3CB3] py-4 items-center gap-2"
             onPress={() => {
-             const movieToSend = {
+            const movieToSend = {
               id:item.id,
               title:item.title,
               original_title:item.original_title,
@@ -122,6 +122,7 @@ const Details = () => {
               vote_average: item.vote_average,
               likeCount:data.likeCount,
               dislikeCount:data.dislikeCount
+            
             };
             navigation.navigate("MoviePlayer", { movie: movieToSend, trailerKey });
             }}
