@@ -22,60 +22,72 @@ const Register = () => {
   }
 
   const register = async () => {
-    // Frontend validation
-    const requiredFields = ['firstname', 'lastname', 'username', 'email', 'password', 'confirmPassword']
-    for (let field of requiredFields) {
-      if (!formData[field] || formData[field].trim() === '') {
-        Toast.show({
-          type: 'error',
-          text1: 'Validation Error',
-          text2: `Please fill in your ${field}.`,
-          position: 'top',
-          visibilityTime: 3000,
-          topOffset: 50,
-        })
-        return
-      }
-    }
-
-    if (formData.password !== formData.confirmPassword) {
+  const requiredFields = ['firstname', 'lastname', 'username', 'email', 'password', 'confirmPassword'];
+  for (let field of requiredFields) {
+    if (!formData[field] || formData[field].trim() === '') {
       Toast.show({
         type: 'error',
-        text1: 'Password Mismatch',
-        text2: 'Password and Confirm Password must match.',
+        text1: 'Validation Error',
+        text2: `Please fill in your ${field}.`,
         position: 'top',
         visibilityTime: 3000,
         topOffset: 50,
-      })
-      return
-    }
-
-    // Backend API Call
-    const data = await RegisterFetch(formData)
-
-    if (data.success) {
-      Toast.show({
-        type: 'success',
-        text1: 'Register Success',
-        text2: data.message || 'Confirm your email to complete your registration',
-        position: 'top',
-        visibilityTime: 3000,
-        topOffset: 50,
-      })
-      setTimeout(() => {
-        navigation.navigate("Login")
-      }, 2000)
-    } else {
-      Toast.show({
-        type: 'error',
-        text1: 'Register Failed',
-        text2: data.message || 'Something went wrong',
-        position: 'top',
-        visibilityTime: 3000,
-        topOffset: 50,
-      })
+      });
+      return;
     }
   }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+    Toast.show({
+      type: 'error',
+      text1: 'Invalid Email',
+      text2: 'Please enter a valid email address.',
+      position: 'top',
+      visibilityTime: 3000,
+      topOffset: 50,
+    });
+    return;
+  }
+
+  if (formData.password !== formData.confirmPassword) {
+    Toast.show({
+      type: 'error',
+      text1: 'Password Mismatch',
+      text2: 'Password and Confirm Password must match.',
+      position: 'top',
+      visibilityTime: 3000,
+      topOffset: 50,
+    });
+    return;
+  }
+
+  const data = await RegisterFetch(formData);
+
+  if (data.success) {
+    Toast.show({
+      type: 'success',
+      text1: 'Register Success',
+      text2: data.message || 'Confirm your email to complete your registration',
+      position: 'top',
+      visibilityTime: 3000,
+      topOffset: 50,
+    });
+    setTimeout(() => {
+      navigation.navigate("Login");
+    }, 2000);
+  } else {
+    Toast.show({
+      type: 'error',
+      text1: 'Register Failed',
+      text2: data.message || 'Something went wrong',
+      position: 'top',
+      visibilityTime: 3000,
+      topOffset: 50,
+    });
+  }
+};
+
 
   const textColor = isDarkMode ? '#FFFFFF' : '#000000'
   const borderColor = isDarkMode ? '#FFFFFF' : '#000000'

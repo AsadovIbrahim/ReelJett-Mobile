@@ -9,14 +9,15 @@ import {
   GetSearchedMovies,
   GetUpcomingMovies,
   GetAllPersonalMovies,
-  GetTopRatedMovies
+  GetTopRatedMovies,
+  GetMyMovies
 } from '../utils/fetchs';
 import { useFocusEffect } from '@react-navigation/native';
 import Toast from 'react-native-toast-message'
 import PersonalContentCard from '../screens/personalmovie/components/PersonalContentCard';
 
   
-const ContentList = ({ searchTerm, searchQuery, type }) => {
+const ContentList = ({ searchTerm, searchQuery, type,myContent=false,ListHeaderComponent = null }) => {
   const [data, setData] = useState([]);
   const [isFavourite, setIsFavourite] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -52,7 +53,7 @@ const ContentList = ({ searchTerm, searchQuery, type }) => {
         }
       }
       else if(type==="video") {
-        const data = await GetAllPersonalMovies();
+        const data = myContent?await GetMyMovies():await GetAllPersonalMovies()
         setData(data);
       }
       
@@ -114,6 +115,7 @@ const ContentList = ({ searchTerm, searchQuery, type }) => {
       <FlatList
         horizontal={type === "movie"}
         showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={ListHeaderComponent}
         ListEmptyComponent={NoItems}
         contentContainerStyle={{ gap: 8, paddingHorizontal: 22 }}
         data={data}

@@ -2,9 +2,12 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Alert, ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { useTranslation } from 'react-i18next';
 import { useRoute } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faE, faEye } from '@fortawesome/free-solid-svg-icons';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useMMKVBoolean } from 'react-native-mmkv';
 import Comments from '../../common/Comments';
+import LikeButton from '../../common/LikeButton';
 
 const PersonalMoviePlayer = () => {
   const route = useRoute();
@@ -51,6 +54,11 @@ const PersonalMoviePlayer = () => {
         <Text style={{ color: isDarkMode ? '#fff' : '#000' }} className='text-3xl font-extrabold mb-2 mt-3'>
           {movie.title}
         </Text>
+        <View className='flex-row items-center mb-2'>
+          <LikeButton movieId={movie.id} initialLike={movie.likeCount} initialDislike={movie.dislikeCount} />
+          <FontAwesomeIcon icon={faEye} size={20} color="gray" />
+          <Text className='ms-1' style={{ color: isDarkMode ? "white" : "black" }}>{movie.viewCount || 1}</Text>
+        </View>
 
         <View className='flex-row gap-5 items-center'>
           <Image
@@ -70,12 +78,7 @@ const PersonalMoviePlayer = () => {
   className='mt-3 p-2 px-4 rounded-lg'
 >
   <View className='flex-row gap-5 justify-between'>
-    <Text
-      style={{ color: isDarkMode ? '#fff' : '#000' }}
-      className='mb-2 mt-3 font-extrabold'
-    >
-      {movie.viewCount} views
-    </Text>
+   
     <Text
       style={{ color: isDarkMode ? '#fff' : '#000' }}
       className='mb-2 mt-3'

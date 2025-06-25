@@ -324,6 +324,16 @@ export const GetAllPersonalMovies=async()=>{
     }
 }
     
+export const GetMyMovies=async()=>{
+    try{
+        const response= await fetch(`${VITE_BASE_URL}/PersonalMovie/GetMyMovies`);
+        const data=await response.json();
+        return data;  
+
+    }catch(error){
+        console.error(error);
+    }
+}
 export const GetComments = async (movieid)=>{
     try{
         const response=await fetch(`${VITE_BASE_URL}/Comment/GetComments?movieid=${movieid}`);
@@ -379,4 +389,6 @@ export const DeleteComment = async (commentId)=>{
         console.error(error);
     }
 }
+
+
 
