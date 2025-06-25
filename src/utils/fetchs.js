@@ -305,7 +305,7 @@ export const SetViewCount=async(movieid)=>{
               'Content-Type': 'application/json',
             }
         });
-        const data=await response.text();
+        const data=await response.json();
         return data;
     }
     catch(error){

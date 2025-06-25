@@ -6,6 +6,7 @@ import Settings from '../screens/profile/Settings';
 import Help from '../screens/profile/Help';
 import EditProfile from '../screens/profile/EditProfile';
 import ProfileHeader from './components/ProfileHeader';
+import PersonalMoviePlayer from '../screens/personalmovieplayer/PersonalMoviePlayer';
 import { storage } from '../utils/MMKVStore';
 
 
@@ -21,6 +22,7 @@ const ProfileStack = () => {
             <Stack.Screen options={{header: () => <ProfileHeader pagename="Edit Profile"/>}} name="EditProfile" component={EditProfile} />
             <Stack.Screen options={{header: () => <ProfileHeader pagename="Settings"/>}} name="Settings" component={Settings} />
             <Stack.Screen options={{header: () => <ProfileHeader pagename="Help"/>}} name="Help" component={Help} />
+            <Stack.Screen options={{header: () => <ProfileHeader pagename="Video Player"/>}} name="PersonalMoviePlayer" component={PersonalMoviePlayer} />
         </Stack.Navigator>
     )
 }

@@ -1,7 +1,6 @@
 import { View } from 'react-native';
 import ContentList from '../../common/ContentList';
 import { useMMKVBoolean } from 'react-native-mmkv';
-import { useState } from 'react';
 
 const PersonalMovie=()=>{
     const [isDarkMode] = useMMKVBoolean("darkMode");

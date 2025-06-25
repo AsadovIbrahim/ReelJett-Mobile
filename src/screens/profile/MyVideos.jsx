@@ -1,8 +1,8 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
+import { useState, useEffect } from 'react';
 import ContentList from '../../common/ContentList';
-import { storage } from "../../utils/MMKVStore";
-import { useState, useEffect } from "react";
+import { storage } from '../../utils/MMKVStore';
 
 const MyVideos = () => {
   const [isDarkMode] = useMMKVBoolean("darkMode");
@@ -15,55 +15,28 @@ const MyVideos = () => {
   }, []);
 
   const profileHeader = (
-  <View
-    style={{
-      alignItems: 'center',
-      paddingVertical: 30,
-      paddingHorizontal: 20,
-      borderBottomWidth: 1,
-      borderBottomColor: '#292737',
-      backgroundColor: '#252631',
-    }}
-  >
-    {imageUri && (
-      <Image
-        source={{ uri: imageUri }}
-        style={{
-          width: 150,
-          height: 150,
-          borderRadius: 80,
-          marginBottom: 12,
-          borderWidth: 2,
-          borderColor: '#666',
-        }}
-      />
-    )}
-    <Text
-      style={{
-        fontSize: 20,
-        fontWeight: '700',
-        color: '#fff',
-        marginBottom: 4,
-      }}
-    >
-      {username}
-    </Text>
-    <Text
-      style={{
-        fontSize: 16,
-        color: '#aaa',
-      }}
-    >
-      My Videos
-    </Text>
-  </View>
-);
+    <View className={`items-center px-5 mb-6 py-2 ${isDarkMode ? 'bg-[#252631]' : 'bg-white'}`}>
+      {imageUri && (
+        <Image
+          source={{ uri: imageUri }}
+          style={{width:140,height:140}}
+          className="rounded-full mb-3 border-2 border-gray-500"
+        />
+      )}
+      <Text className={`text-xl font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-black'}`}>
+        {username}
+      </Text>
+      <Text className="text-base text-gray-400">My Videos</Text>
+    </View>
+  );
 
   return (
-    <View contentContainerStyle={{ paddingBottom: 2 }} className="flex-1 bg-[#15121E]"
-              style={{ flex: 1, backgroundColor: isDarkMode ? '#252631' : '#ffffff' }}
-        >
-      <ContentList type="video" myContent={true} ListHeaderComponent={profileHeader} />
+    <View className={`flex-1 ${isDarkMode ? 'bg-[#252631]' : 'bg-white'}`}>
+      <ContentList
+        type="video"
+        myContent={true}
+        ListHeaderComponent={profileHeader}
+      />
     </View>
   );
 };

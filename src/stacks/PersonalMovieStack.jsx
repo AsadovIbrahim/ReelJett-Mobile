@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeHeader from './components/HomeHeader';
 import PersonalMovie from '../screens/personalmovie/PersonalMovie';
 import PersonalMoviePlayer from '../screens/personalmovieplayer/PersonalMoviePlayer';
+import MyVideos from '../screens/profile/MyVideos';
 
 const Stack = createNativeStackNavigator()
 

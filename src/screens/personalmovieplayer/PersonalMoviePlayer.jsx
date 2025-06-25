@@ -2,12 +2,11 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Alert, ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { useTranslation } from 'react-i18next';
 import { useRoute } from '@react-navigation/native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faE, faEye } from '@fortawesome/free-solid-svg-icons';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useMMKVBoolean } from 'react-native-mmkv';
 import Comments from '../../common/Comments';
 import LikeButton from '../../common/LikeButton';
+import ViewCount from '../../common/ViewCount';
 
 const PersonalMoviePlayer = () => {
   const route = useRoute();
@@ -56,8 +55,8 @@ const PersonalMoviePlayer = () => {
         </Text>
         <View className='flex-row items-center mb-2'>
           <LikeButton movieId={movie.id} initialLike={movie.likeCount} initialDislike={movie.dislikeCount} />
-          <FontAwesomeIcon icon={faEye} size={20} color="gray" />
-          <Text className='ms-1' style={{ color: isDarkMode ? "white" : "black" }}>{movie.viewCount || 1}</Text>
+          <ViewCount movieId={movie.id} initialCount={movie.viewCount} />
+
         </View>
 
         <View className='flex-row gap-5 items-center'>
@@ -104,8 +103,8 @@ const PersonalMoviePlayer = () => {
         </Text>
       }
     </Text>
-  </TouchableOpacity>
-</View>
+    </TouchableOpacity>
+  </View>
 
       </View>
 
