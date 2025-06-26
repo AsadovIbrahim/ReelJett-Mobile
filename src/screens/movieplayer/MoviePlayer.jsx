@@ -6,7 +6,7 @@ import { useMMKVBoolean } from 'react-native-mmkv';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import LikeButton from '../../common/LikeButton';
 import Comments from '../../common/Comments';
-import { GetMovieEmbedLink, SetViewCount } from '../../utils/fetchs';
+import { GetMovieEmbedLink} from '../../utils/fetchs';
 import ViewCount from '../../common/ViewCount';
 
 const fallbackLink ='https://streambucket.net/?play=SW1HV1NUZUcxTWdkNDd2QVRGb0tTaXFTVStiSXNRdkNNcXVqOWtRdGljYU5nQ1JNd21GbWdVeTN5anE2RG1rN2RMSVcvT09YSVo1V0pHbzZjNlhLN2F4MDNZaWhzN2hDUDhRV1dtMFRoUnl4d0YyNFJWQVRlOTAvLzBEay9ZODZwOFdFQnJYUTYvUWRGVjJNQ0ZqbndURzY5QT09';

@@ -34,7 +34,9 @@ const MyVideos = () => {
     <View className={`flex-1 ${isDarkMode ? 'bg-[#252631]' : 'bg-white'}`}>
       <ContentList
         type="video"
+        showLoading={true}
         myContent={true}
+        loadingType="basic"
         ListHeaderComponent={profileHeader}
       />
     </View>

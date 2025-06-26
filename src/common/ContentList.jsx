@@ -1,23 +1,24 @@
-import { useState, useCallback } from 'react';
-import { Text, View, FlatList, ActivityIndicator } from 'react-native';
 import ContentCard from './ContentCard';
-import { useTranslation } from 'react-i18next';
-import { useMMKVString, useMMKVBoolean } from "react-native-mmkv";
-import {
-  GetFavouriteProfessionalMovies,
-  GetNewReleaseMovies,
-  GetSearchedMovies,
-  GetUpcomingMovies,
-  GetAllPersonalMovies,
-  GetTopRatedMovies,
-  GetMyMovies
-} from '../utils/fetchs';
-import { useFocusEffect } from '@react-navigation/native';
+import SkeletonCard from './SkeletonCard';
+import { useState, useCallback } from 'react';
 import Toast from 'react-native-toast-message'
+import { useTranslation } from 'react-i18next';
+import { Text, View, FlatList,ActivityIndicator} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { useMMKVString, useMMKVBoolean } from "react-native-mmkv";
 import PersonalContentCard from '../screens/personalmovie/components/PersonalContentCard';
-
+import {GetFavouriteProfessionalMovies,GetNewReleaseMovies,GetSearchedMovies,GetUpcomingMovies,GetAllPersonalMovies,GetTopRatedMovies,GetMyMovies} from '../utils/fetchs';
   
-const ContentList = ({ searchTerm, searchQuery, type,myContent=false,ListHeaderComponent = null }) => {
+const ContentList = ({ 
+  searchTerm, 
+  searchQuery, 
+  type,
+  myContent=false,
+  ListHeaderComponent = null,
+  showLoading = true,  
+  loadingType = "skeleton"}) => {
+
+    
   const [data, setData] = useState([]);
   const [isFavourite, setIsFavourite] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -85,48 +86,58 @@ const ContentList = ({ searchTerm, searchQuery, type,myContent=false,ListHeaderC
     }, [searchTerm, searchQuery, type])
   );
 
-  if (loading) {
-    return (
-      <View className="w-full h-[200px] justify-center items-center">
-        <ActivityIndicator size="large" color={isDarkMode ? 'white' : 'black'} />
-        <Text style={{ color: isDarkMode ? 'white' : 'black', marginTop: 12 }}>
-          {t("loading")}...
-        </Text>
-      </View>
-    );
-  }
-
   return (
-    <View className='mt-6'>
+  <View className='mt-6'>
+    {type === "movie" && (
       <Text
         className='font-manropeBold text-white font-extrabold text-3xl ml-8 mb-5'
         style={{ color: isDarkMode ? '#fff' : '#000' }}
       >
-        {
-        
-        type=="movie"?
-        (searchTerm ? searchTerm : "Searched") +" "+ t("movies")
-        :
-        ""
-        
-        }
+        {(searchTerm ? searchTerm : "Searched") + " " + t("movies")}
       </Text>
+    )}
 
+    {loading && showLoading ? (
+  loadingType === "basic" ? (
+    <View className="w-full h-[200px] justify-center items-center">
+      <ActivityIndicator size="large" color={isDarkMode ? 'white' : 'black'} />
+      <Text style={{ color: isDarkMode ? 'white' : 'black', marginTop: 12 }}>
+        {t("loading")}...
+      </Text>
+    </View>
+  ) : (
+    <View className="w-full h-[200px] justify-center">
       <FlatList
         horizontal={type === "movie"}
         showsHorizontalScrollIndicator={false}
-        ListHeaderComponent={ListHeaderComponent}
-        ListEmptyComponent={NoItems}
-        contentContainerStyle={{ gap: 8, paddingHorizontal: 22 }}
-        data={data}
-        renderItem={({ item }) => (
-        (
-          type==="movie" ? <ContentCard refreshParent={getData} isFavourite={isFavourite} item={item} type={type} />:<PersonalContentCard item={item}></PersonalContentCard>
-        )
+        contentContainerStyle={{ paddingHorizontal: 22, gap: 8 }}
+        data={Array(8).fill(0)}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={() => (
+          <SkeletonCard isDarkMode={isDarkMode} />
         )}
       />
     </View>
-  );
+  ) 
+) : (
+  <FlatList
+    horizontal={type === "movie"}
+    showsHorizontalScrollIndicator={false}
+    ListHeaderComponent={ListHeaderComponent}
+    ListEmptyComponent={NoItems}
+    contentContainerStyle={{ gap: 8, paddingHorizontal: 22 }}
+    data={data}
+    renderItem={({ item }) => (
+      type === "movie"
+        ? <ContentCard refreshParent={getData} isFavourite={isFavourite} item={item} type={type} />
+        : <PersonalContentCard item={item} />
+    )}
+  />
+)}
+
+  </View>
+);
+
 };
 
 export default ContentList;
