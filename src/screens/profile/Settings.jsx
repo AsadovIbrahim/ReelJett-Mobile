@@ -45,6 +45,8 @@ const Settings = () => {
           >
             <Picker.Item label="English" value="en" />
             <Picker.Item label="Русский" value="ru" />
+            <Picker.Item label="Azərbaycan" value="az" />
+            <Picker.Item label="Türkçe" value="tr" />
           </Picker>
         </View>
       </View>

@@ -1,0 +1,136 @@
+{
+  "watchAnyDevice": "İstənilən cihazda izləyin",
+  "streamAnywhere": "Telefon, planşet, noutbuk və televizorda əlavə ödəniş olmadan izləyin",
+  
+  "upload": "Öz filmlərinizi yükləyin",
+  "abilityposting": "Şəxsi qısa filmlərinizi bağlantı ilə paylaşmaq imkanı",
+  
+  "findfavourites": "Sevimlilərinizi tapın",
+  "personalizedmovie": "Zövqünüzə uyğun fərdiləşdirilmiş film tövsiyələri",
+  
+  "howDoIWatch": "Necə izləyə bilərəm?",
+  "membersSubscribe": "Reel Jet-ə üzv olanlar tətbiqdə izləyə bilərlər",
+  
+  "language": "AZ",
+  "getStarted": "Başla",
+
+
+  "noavatar": "Avatar yoxdur",
+  "logout": "Çıxış et",
+  "noitemsfound": "Heç nə tapılmadı",
+  "signin": "Daxil ol",
+  "donthaveaccount": "Hesabınız yoxdur? Qeydiyyatdan keçin",
+
+  "usernameInput": "İstifadəçi adı",
+  "firstname-text": "Ad",
+  "lastname-text": "Soyad",
+  "confirm-password-text": "Şifrəni təsdiqlə",
+  "passwordInput": "Şifrə",
+  "emailInput": "E-poçt ünvanı",
+  "signup": "Qeydiyyat",
+  "alreadyhas": "Artıq hesabınız var? Daxil olun",
+  "more": "daha çox",
+  "play": "Oynat",
+  "similar": "Oxşar",
+  "movies": "Filmlər",
+  "tvshows": "Seriallar",
+  "mylist": "+ Siyahım",
+  "actors": "Aktorlar",
+  "welcome": "Xoş gəlmisiniz",
+  "resultsfor": "Axtarış nəticələri:",
+  "trendingmovies": "Gələcək Filmlər",
+  "trendingshows": "Trenddə olan Seriallar",
+  "searchquery": "Film, serial və ya aktyor axtarın",
+  "min": "dəq",
+  "favourites-add-ok": "Film sevimlilərə əlavə edildi",
+  "favourites-add-fail": "Film artıq sevimlilərdədir",
+  "must-be-logged-in-text": "Bu əməliyyatı yerinə yetirmək üçün daxil olmalısınız",
+  "languageSettings": "Dil Ayarları",
+  "switchAppearence": "Görünüşü dəyiş",
+  "darkMode": "Qaranlıq rejim",
+
+  "loading": "Yüklənir..",
+
+  "add-comment-text": "Şərh əlavə edin...",
+  "comment-text": "Şərhlər",
+
+  "New Release": "Yeni Çıxacaq",
+  "Upcoming": "Gələcək",
+  "Your Favourite": "Sevimli",
+  "Top Rated": "Ən Yüksək Reytinqli",
+  "views": "baxış",
+  "see only favourites": "Yalnız sevimliləri göstər",
+
+  "history": "Tarixçə",
+  "my videos": "Videolarım",
+  "edit profile": "Profili redaktə et",
+  "settings": "Ayarlar",
+  "help": "Kömək",
+
+  "save": "Yadda saxla",
+  "delete": "Sil",
+  "cancel": "Ləğv et",
+  "doyouwanttodelete": "Bu elementi favoritlərdən silmək istəyirsiniz?",
+  "areyousuredelete": "Bu şərhi silmək istədiyinizə əminsiniz?",
+
+
+  "loginValidationError": "Zəhmət olmasa {{field}} daxil edin.",
+  "loginSuccessTitle": "Giriş uğurludur",
+  "loginSuccessMessage": "Xoş gəldiniz!",
+  "loginFailedTitle": "Giriş uğursuz oldu",
+  "loginFailedInvalid": "İstifadəçi adı və ya şifrə yanlışdır.",
+  "loginFailedDefault": "Giriş zamanı xəta baş verdi",
+
+
+  "registerValidationError": "{{field}} xanalarını doldurun.",
+  "registerInvalidEmailTitle": "Etibarsız Email",
+  "registerInvalidEmailText": "Zəhmət olmasa düzgün email ünvanı daxil edin.",
+  "registerPasswordMismatchTitle": "Parollar uyğun deyil",
+  "registerPasswordMismatchText": "Şifrə və təkrar şifrə eyni olmalıdır.",
+  "registerSuccessTitle": "Qeydiyyat uğurlu oldu",
+  "registerSuccessText": "Qeydiyyatı tamamlamaq üçün emailinizi təsdiqləyin.",
+  "registerFailedTitle": "Qeydiyyat uğursuz oldu",
+  "registerFailedText": "Xəta baş verdi",
+
+
+"forgotPassword": "Şifrəni unutmusunuz?",
+
+"forgotPasswordTitle": "Şifrəni unutmusunuz?",
+"forgotPasswordSubText": "E-mail ünvanınızı daxil edin, sizə şifrəni yeniləmək üçün link göndərək.",
+"forgotPasswordSuccessTitle": "Uğurlu",
+"forgotPasswordSuccessMessage": "Yeniləmə linki e-mail ünvanınıza göndərildi.",
+"forgotPasswordErrorTitle": "Xəta",
+"forgotPasswordErrorMessage": "Xəta baş verdi.",
+"forgotPasswordEmptyEmail": "Zəhmət olmasa e-mail ünvanınızı daxil edin.",
+"sendResetLink": "Yeniləmə linki göndər",
+"backToLogin": "Girişə qayıt",
+
+"forgotPasswordErrorServer": "Link göndərilə bilmədi. Zəhmət olmasa, yenidən cəhd edin.",
+"forgotPasswordErrorNetwork": "Xəta baş verdi. Zəhmət olmasa, bir az sonra yenidən cəhd edin.",
+
+"success": "Uğurlu",
+"error": "Xəta",
+
+"deleteFromFavouritesQuestion": "Bu filmi favorilərinizdən silmək istəyirsiniz?",
+  "deleteMyContentQuestion": "Bu filmi silmək istəyirsiniz?",
+
+  "tab_home": "Ana Səhifə",
+  "tab_search": "Axtarış",
+  "tab_movies": "Filmlər",
+  "tab_videos": "Videolar",
+  "tab_profile": "Profil"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

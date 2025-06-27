@@ -50,6 +50,88 @@
     "loading":"Загрузка..",
     "add-comment-text": "Добавить комментарий...",
 
-    "comment-text": "Комментариев"
+    "comment-text": "Комментариев",
+
+
+    "New Release":"Новый выпуск",
+    "Upcoming":"Предстоящие",
+    "Your Favourite":"Ваш любимый",
+    "Top Rated":"Высоким рейтингом",
+
+    "views":"Просмотры",
+    "see only favourites":"Видеть только любимое",
+
+    "history":"История",
+    "my videos":"Мои видео",
+    "edit profile":"Редактировать профиль",
+    "settings":"Настройки",
+    "help":"Помощь",
+
+
+
+    "save":"Сохранить",
+    "cancel":"Отменить",
+    "delete": "Удалить",
+    "doyouwanttodelete": "Вы хотите удалить этот элемент из избранного?",
+    "areyousuredelete": "Вы уверены, что хотите удалить этот комментарий?",
+
+    "loginValidationError": "Пожалуйста, введите {{field}}.",
+    "loginSuccessTitle": "Успешный вход",
+    "loginSuccessMessage": "С возвращением!",
+    "loginFailedTitle": "Ошибка входа",
+    "loginFailedInvalid": "Неверное имя пользователя или пароль.",
+    "loginFailedDefault": "Не удалось войти в систему",
+
+
+    "registerValidationError": "Пожалуйста, заполните поле {{field}}.",
+"registerInvalidEmailTitle": "Неверный адрес эл. почты",
+"registerInvalidEmailText": "Пожалуйста, введите действительный адрес электронной почты.",
+"registerPasswordMismatchTitle": "Пароли не совпадают",
+"registerPasswordMismatchText": "Пароль и подтверждение пароля должны совпадать.",
+"registerSuccessTitle": "Регистрация прошла успешно",
+"registerSuccessText": "Подтвердите свой email для завершения регистрации.",
+"registerFailedTitle": "Ошибка регистрации",
+"registerFailedText": "Произошла ошибка",
+
+
+
+"forgotPassword": "Забыли пароль?",
+"forgotPasswordTitle": "Забыли пароль?",
+"forgotPasswordSubText": "Введите ваш адрес электронной почты, и мы отправим ссылку для сброса пароля.",
+"forgotPasswordSuccessTitle": "Успешно",
+"forgotPasswordSuccessMessage": "Ссылка для сброса отправлена на ваш email.",
+"forgotPasswordErrorTitle": "Ошибка",
+"forgotPasswordErrorMessage": "Произошла ошибка.",
+"forgotPasswordEmptyEmail": "Пожалуйста, введите ваш email.",
+"sendResetLink": "Отправить ссылку",
+"backToLogin": "Назад ко входу",
+
+"forgotPasswordErrorServer": "Не удалось отправить ссылку. Пожалуйста, попробуйте еще раз.",
+"forgotPasswordErrorNetwork": "Произошла ошибка. Пожалуйста, повторите попытку позже.",
+
+"success": "Успешно",
+"error": "Ошибка",
+
+"deleteFromFavouritesQuestion": "Bu filmi favorilərinizdən silmək istəyirsiniz?",
+  "deleteMyContentQuestion": "Bu filmi silmək istəyirsiniz?",
+
+
+  "tab_home": "Главная",
+  "tab_search": "Поиск",
+  "tab_movies": "Фильмы",
+  "tab_videos": "Видео",
+  "tab_profile": "Профиль"
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

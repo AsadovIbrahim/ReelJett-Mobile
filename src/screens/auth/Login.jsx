@@ -29,8 +29,8 @@ const Login = () => {
     if (!formData[field] || formData[field].trim() === '') {
       Toast.show({
         type: 'error',
-        text1: 'Validation Error',
-        text2: `Please enter your ${field}.`,
+        text1: t('loginFailedTitle'),
+        text2: t('loginValidationError', { field: t(`${field}Input`) }),
         position: 'top',
         visibilityTime: 3000,
         topOffset: 50,
@@ -48,27 +48,29 @@ const Login = () => {
 
     Toast.show({
       type: 'success',
-      text1: 'Login Success',
-      text2: 'Welcome back!',
+      text1: t('loginSuccessTitle'),
+      text2: t('loginSuccessMessage'),
       position: 'top',
       visibilityTime: 2000,
       topOffset: 50,
     });
   } else {
-    let message = data.message || 'Login failed';
-    if (message.toLowerCase().includes("invalid")) {
-      message = "Invalid username or password.";
-    }
+    let message = data.message || '';
+    let translatedMessage = message.toLowerCase().includes("invalid")
+      ? t("loginFailedInvalid")
+      : t("loginFailedDefault");
+
     Toast.show({
       type: 'error',
-      text1: 'Login Failed',
-      text2: message,
+      text1: t('loginFailedTitle'),
+      text2: translatedMessage,
       position: 'top',
       visibilityTime: 3000,
       topOffset: 50,
     });
   }
 };
+
 
   const textColor = isDarkMode ? '#FFFFFF' : '#000000';
   const borderColor = isDarkMode ? '#FFFFFF' : '#000000';
@@ -119,7 +121,7 @@ const Login = () => {
         <View>
           <TouchableOpacity onPress={() => { navigation.navigate("ForgotPassword") }}>
             <Text className='text-right text-[#BCBCBC]'>
-              Forgot Password?
+              {t("forgotPassword")}
             </Text>
           </TouchableOpacity>
         </View>

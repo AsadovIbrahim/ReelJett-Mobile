@@ -217,10 +217,10 @@ const EditProfile = () => {
 
                 <View className="flex-row justify-between mt-3">
                     <TouchableOpacity onPress={handleUpdate} className='bg-[#3A3CB3] px-11 py-3 rounded-lg'>
-                        <Text className='text-white text-center font-bold text-xl'>Save</Text>
+                        <Text className='text-white text-center font-bold text-xl'>{t("save")}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity className='bg-[#2E2B2F] px-11 py-3 rounded-lg' onPress={handleCancel}>
-                        <Text className='text-white text-center font-bold text-xl'>Cancel</Text>
+                        <Text className='text-white text-center font-bold text-xl'>{t("cancel")}</Text>
                     </TouchableOpacity>
                 </View>
                 

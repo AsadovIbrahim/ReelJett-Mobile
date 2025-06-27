@@ -8,13 +8,13 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faThumbsUp, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { LikeComment, DeleteComment } from "../utils/fetchs";
+import { LikeComment, DeleteComment , DeleteUnwantedComment} from "../utils/fetchs";
 import { useTranslation } from "react-i18next";
 import { useMMKVString, useMMKVBoolean } from "react-native-mmkv";
 import { storage } from "../utils/MMKVStore";
 import { Modal } from "react-native";
 
-const CommentItem = ({ comment, refreshParent }) => {
+const CommentItem = ({ movieId,myContent,comment, refreshParent }) => {
   const { id, profilePhoto, username, content, sendingDate, likeCount } = comment;
   const [likeCounter, setLikeCounter] = useState(likeCount);
 
@@ -40,7 +40,8 @@ const CommentItem = ({ comment, refreshParent }) => {
 
   const handleDelete = async () => {
     try {
-      await DeleteComment(id);
+      if(myContent===false) await DeleteComment(id);
+      else await DeleteUnwantedComment(movieId,id)
       refreshParent?.();
       setShowDeleteModal(false);
     } catch (err) {
@@ -74,14 +75,14 @@ const CommentItem = ({ comment, refreshParent }) => {
               <FontAwesomeIcon icon={faThumbsUp} size={16} color={isDarkMode ? "white" : "#3A3CB3"} />
               <Text className={`ml-1 ${primaryText}`}>{likeCounter}</Text>
             </TouchableOpacity>
-            {currentUser === username && (
-              <TouchableOpacity
-                onPress={() => setShowDeleteModal(true)} // open modal
-                className="flex-row items-center ml-4"
-              >
-                <FontAwesomeIcon icon={faTrash} size={16} color={isDarkMode ? "white" : "#333"} />
-              </TouchableOpacity>
-            )}
+              {(currentUser === username || myContent === true) && (
+                <TouchableOpacity
+                  onPress={() => setShowDeleteModal(true)}
+                  className="flex-row items-center ml-4"
+                >
+                  <FontAwesomeIcon icon={faTrash} size={16} color={isDarkMode ? "white" : "#333"} />
+                </TouchableOpacity>
+              )}
           </View>
         </View>
       </View>
@@ -94,21 +95,21 @@ const CommentItem = ({ comment, refreshParent }) => {
       >
         <View className="flex-1 justify-center items-center bg-black/50">
           <View className={`w-2/3 p-6 rounded-xl ${isDarkMode ? "bg-[#2C2C36]" : "bg-white"}`}>
-            <Text className={`text-lg font-semibold mb-4 ${primaryText}`}>Are you sure you want to delete this comment?</Text>
+            <Text className={`text-lg font-semibold mb-4 ${primaryText}`}>{t("areyousuredelete")}</Text>
             
             <View className="flex-row justify-between">
               <TouchableOpacity
                 onPress={handleDelete}
                 className="px-4 py-2 rounded-lg bg-[#3A3CB3]"
               >
-                <Text className="text-white font-bold">DELETE</Text>
+                <Text className="text-white font-bold">{t("delete")}</Text>
               </TouchableOpacity>
               
               <TouchableOpacity
                 onPress={() => setShowDeleteModal(false)}
                 className="px-4 py-2 rounded-lg bg-gray-400"
               >
-                <Text className="text-white font-bold">CANCEL</Text>
+                <Text className="text-white font-bold">{t("cancel")}</Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -1,0 +1,141 @@
+{
+  "watchAnyDevice": "Her cihazda izleyin",
+  "streamAnywhere": "Telefon, tablet, dizüstü bilgisayar ve televizyonda ek ücret ödemeden izleyin",
+
+  "upload": "Kendi filmlerinizi yükleyin",
+  "abilityposting": "Bağlantılarla birlikte kişisel kısa filmlerinizi paylaşma imkanı",
+
+  "findfavourites": "Favorilerinizi bulun",
+  "personalizedmovie": "Zevkinize uygun kişiselleştirilmiş film önerileri",
+
+  "howDoIWatch": "Nasıl izlerim?",
+  "membersSubscribe": "Reel Jet'e katılan üyeler uygulama üzerinden izleyebilir",
+
+  "language": "TR",
+  "getStarted": "Başla",
+
+  "noavatar": "Avatar yok",
+  "logout": "Çıkış yap",
+  "noitemsfound": "Hiçbir öğe bulunamadı",
+  "signin": "Giriş yap",
+  "donthaveaccount": "Hesabınız yok mu? Kayıt olun",
+
+  "usernameInput": "Kullanıcı adı",
+  "firstname-text": "Ad",
+  "lastname-text": "Soyad",
+  "confirm-password-text": "Şifreyi onayla",
+  "passwordInput": "Şifre",
+  "emailInput": "E-posta adresi",
+  "signup": "Kayıt ol",
+  "alreadyhas": "Zaten hesabınız var mı? Giriş yapın",
+  "more": "daha fazla",
+  "play": "Oynat",
+  "similar": "Benzer",
+  "movies": "Filmler",
+  "tvshows": "Diziler",
+  "mylist": "+ Listem",
+  "actors": "Oyuncular",
+  "welcome": "Hoş geldiniz",
+  "resultsfor": "Şunun için sonuçlar:",
+  "trendingmovies": "Yaklaşan Filmler",
+  "trendingshows": "Trend Diziler",
+  "searchquery": "Film, dizi veya oyuncu ara",
+  "min": "dk",
+  "favourites-add-ok": "Film başarıyla favorilere eklendi",
+  "favourites-add-fail": "Film zaten favorilerde",
+  "must-be-logged-in-text": "Bu işlemi gerçekleştirmek için giriş yapmalısınız",
+  "languageSettings": "Dil Ayarları",
+  "switchAppearence": "Görünümü değiştir",
+  "darkMode": "Karanlık Mod",
+
+  "loading": "Yükleniyor..",
+
+  "add-comment-text": "Yorum ekle...",
+  "comment-text": "Yorumlar",
+
+  "New Release": "Yeni Yayın",
+  "Upcoming": "Yakında",
+  "Your Favourite": "Favori",
+  "Top Rated": "En Yüksek Puanlı",
+  "views": "görüntülenme",
+  "see only favourites": "Sadece favorileri göster",
+
+  "history": "Geçmiş",
+  "my videos": "Videolarım",
+  "edit profile": "Profili Düzenle",
+  "settings": "Ayarlar",
+  "help": "Yardım",
+
+  "save": "Kaydet",
+  "delete": "Sil",
+  "cancel": "İptal",
+  "doyouwanttodelete": "Bu öğeyi favorilerden silmek istiyor musunuz?",
+  "areyousuredelete": "Bu yorumu silmek istediğinizden emin misiniz?",
+  
+  
+  "loginValidationError": "{{field}} alanını doldurmanız gerekiyor.",
+  "loginSuccessTitle": "Giriş Başarılı",
+  "loginSuccessMessage": "Tekrar hoş geldiniz!",
+  "loginFailedTitle": "Giriş Başarısız",
+  "loginFailedInvalid": "Kullanıcı adı veya şifre geçersiz.",
+  "loginFailedDefault": "Giriş başarısız oldu",
+
+
+  "registerValidationError": "{{field}} alanlarını doldurun.",
+"registerInvalidEmailTitle": "Geçersiz E-posta",
+"registerInvalidEmailText": "Lütfen geçerli bir e-posta adresi girin.",
+"registerPasswordMismatchTitle": "Parolalar uyuşmuyor",
+"registerPasswordMismatchText": "Şifre ve tekrar şifre aynı olmalıdır.",
+"registerSuccessTitle": "Kayıt Başarılı",
+"registerSuccessText": "Kaydı tamamlamak için e-postanızı onaylayın.",
+"registerFailedTitle": "Kayıt Başarısız",
+"registerFailedText": "Bir hata oluştu",
+
+
+
+"forgotPassword": "Şifrenizi mi unuttunuz?",
+
+"forgotPasswordTitle": "Şifreni mi unuttun?",
+"forgotPasswordSubText": "E-posta adresinizi girin, şifre sıfırlama bağlantısı gönderelim.",
+"forgotPasswordSuccessTitle": "Başarılı",
+"forgotPasswordSuccessMessage": "Şifre sıfırlama bağlantısı e-postanıza gönderildi.",
+"forgotPasswordErrorTitle": "Hata",
+"forgotPasswordErrorMessage": "Bir hata oluştu.",
+"forgotPasswordEmptyEmail": "Lütfen e-posta adresinizi girin.",
+"sendResetLink": "Bağlantıyı Gönder",
+"backToLogin": "Girişe dön",
+
+
+"forgotPasswordErrorServer": "Bağlantı gönderilemedi. Lütfen tekrar deneyin.",
+"forgotPasswordErrorNetwork": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+
+"success": "Başarılı",
+"error": "Hata",
+
+
+
+  "deleteFromFavouritesQuestion": "Bu filmi favorilerinizden silmek istiyor musunuz?",
+  "deleteMyContentQuestion": "Bu filmi silmek istiyor musunuz?",
+
+
+  
+  "tab_home": "Ana Sayfa",
+  "tab_search": "Ara",
+  "tab_movies": "Filmler",
+  "tab_videos": "Videolar",
+  "tab_profile": "Profil"
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+}

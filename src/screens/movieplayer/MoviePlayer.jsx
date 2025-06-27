@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {View,Text,TouchableOpacity,ActivityIndicator,Dimensions} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 import { useMMKVBoolean } from 'react-native-mmkv';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import LikeButton from '../../common/LikeButton';
 import Comments from '../../common/Comments';
-import { GetMovieEmbedLink} from '../../utils/fetchs';
 import ViewCount from '../../common/ViewCount';
+import { useTranslation } from 'react-i18next';
+import { GetMovieEmbedLink} from '../../utils/fetchs';
+import {View,Text,TouchableOpacity,ActivityIndicator,Dimensions} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const fallbackLink ='https://streambucket.net/?play=SW1HV1NUZUcxTWdkNDd2QVRGb0tTaXFTVStiSXNRdkNNcXVqOWtRdGljYU5nQ1JNd21GbWdVeTN5anE2RG1rN2RMSVcvT09YSVo1V0pHbzZjNlhLN2F4MDNZaWhzN2hDUDhRV1dtMFRoUnl4d0YyNFJWQVRlOTAvLzBEay9ZODZwOFdFQnJYUTYvUWRGVjJNQ0ZqbndURzY5QT09';
 
@@ -22,6 +23,7 @@ const MoviePlayer = () => {
   const [multiple, setMultiple] = useState(null);
   const [viewCount, setViewCount] = useState(1);
   const [isDarkMode] = useMMKVBoolean('darkMode');
+  const {t}= useTranslation();
 
   useEffect(() => {
     const fetchEmbedLink = async () => {
@@ -61,7 +63,7 @@ const MoviePlayer = () => {
       <View className="flex-1 justify-center items-center" style={{ backgroundColor: isDarkMode ? 'black' : 'white' }}>
         <ActivityIndicator size="large" color={isDarkMode ? 'white' : 'black'} />
         <Text className="mt-4 text-base text-center" style={{ color: isDarkMode ? 'white' : 'black' }}>
-          Loading...
+          {t("loading")}
         </Text>
       </View>
     );
@@ -102,7 +104,7 @@ const MoviePlayer = () => {
           const isSelected = currentOption === option;
           const backgroundColor = isSelected ? '#3A3CB3' : 'transparent';
           const textColor = isDarkMode ? 'white' : isSelected ? 'white' : 'black';
-
+          
           return (
             <TouchableOpacity
               key={option}

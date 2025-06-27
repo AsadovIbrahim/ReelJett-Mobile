@@ -7,10 +7,14 @@ import { useMMKVBoolean } from 'react-native-mmkv';
 import Comments from '../../common/Comments';
 import LikeButton from '../../common/LikeButton';
 import ViewCount from '../../common/ViewCount';
+import { storage } from '../../utils/MMKVStore';
+import { AddToFavourites } from '../../utils/fetchs';
+import Toast from 'react-native-toast-message';
 
 const PersonalMoviePlayer = () => {
   const route = useRoute();
   const { movie } = route.params;
+  const { myContent } = route.params;
   const [playing, setPlaying] = useState(false);
   const [viewMore, setViewMore] = useState(false);
   const [isDarkMode] = useMMKVBoolean("darkMode");
@@ -25,18 +29,45 @@ const PersonalMoviePlayer = () => {
 
   const extractYouTubeVideoId = (url) => {
     if (!url) return null;
-    if (url.includes("watch?v=")) {
-      return url.split("watch?v=")[1].substring(0, 11);
-    }
-    if (url.includes("youtu.be/")) {
-      return url.split("youtu.be/")[1].substring(0, 11);
-    }
-    return null;
+
+    const match = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
+    return match ? match[1] : null;
   };
 
-  useEffect(() => {
-    console.log(movie);
-  }, []);
+
+  const handleAddFavourites = async() => {
+    const data=await AddToFavourites(movie.id)
+    if(data==200){
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: t("favourites-add-ok"),
+        position: 'top',
+        visibilityTime: 3000,
+        topOffset: 50,
+      })
+    }
+    else if(data == 409) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: t('favourites-add-fail'),
+        position: 'top',
+        visibilityTime: 3000,
+        topOffset: 50,
+      })
+    }
+    else if(data==401) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: t('must-be-logged-in-text'),
+        position: 'top',
+        visibilityTime: 3000,
+        topOffset: 50,
+      })
+    }
+  };
 
   const videoId = extractYouTubeVideoId(movie.link);
 
@@ -53,20 +84,24 @@ const PersonalMoviePlayer = () => {
         <Text style={{ color: isDarkMode ? '#fff' : '#000' }} className='text-3xl font-extrabold mb-2 mt-3'>
           {movie.title}
         </Text>
-        <View className='flex-row items-center mb-2'>
-          <LikeButton movieId={movie.id} initialLike={movie.likeCount} initialDislike={movie.dislikeCount} />
-          <ViewCount movieId={movie.id} initialCount={movie.viewCount} />
-
+        <View className='flex-row items-center justify-between'>
+          <View className='flex-row items-center mb-2'>
+            <LikeButton movieId={movie.id} initialLike={movie.likeCount} initialDislike={movie.dislikeCount} myContent={myContent}/>
+            <ViewCount movieId={movie.id} initialCount={movie.viewCount} myContent={myContent}/>
+          </View>
+          <TouchableOpacity className="rounded-[8px] bg-[#2E2B2F] flex items-center mr-4 p-2" onPress={handleAddFavourites}>
+            <Text className=' text-white font-extrabold text-lg'>{t("mylist")}</Text>
+          </TouchableOpacity>
         </View>
 
         <View className='flex-row gap-5 items-center'>
           <Image
             style={{ width: 45, height: 45 }}
             className='rounded-full'
-            source={{ uri: movie.publisherPhoto }}
+            source={{ uri: !myContent?movie.publisherPhoto:storage.getString("profilePhoto") }}
           />
           <Text style={{ color: isDarkMode ? '#fff' : '#000' }} className='text-xl font-bold mb-2 mt-3'>
-            {movie.publisherName}
+            {!myContent?movie.publisherName:storage.getString("username")}
           </Text>
         </View>
 
@@ -108,7 +143,7 @@ const PersonalMoviePlayer = () => {
 
       </View>
 
-      <Comments movieId={movie.id} />
+      <Comments myContent={myContent} movieId={movie.id} />
     </ScrollView>
   );
 };

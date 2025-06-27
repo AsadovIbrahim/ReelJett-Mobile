@@ -4,13 +4,15 @@ import FastImage from "react-native-fast-image";
 import { useNavigation } from "@react-navigation/native";
 import { useMMKVBoolean } from 'react-native-mmkv';
 import { DeleteFromFavourites } from "../utils/fetchs";
+import { useTranslation } from "react-i18next";
 
 const ContentCard = ({ refreshParent,isFavourite, item }) => {
 
   const navigation = useNavigation();
-  const [showInfoBar, setShowInfoBar] = useState(false);
   const [isDarkMode] = useMMKVBoolean("darkMode");
+  const [showInfoBar, setShowInfoBar] = useState(false);
   const slideAnim = useState(new Animated.Value(200))[0];
+  const {t} = useTranslation();
 
 
   const handleLongPress = () => {
@@ -93,7 +95,7 @@ const ContentCard = ({ refreshParent,isFavourite, item }) => {
                   marginBottom: 16,
                 }}
               >
-                Do you want to delete this item from favourites?
+                {t("doyouwanttodelete")}
               </Text>
 
               <TouchableOpacity
@@ -113,7 +115,7 @@ const ContentCard = ({ refreshParent,isFavourite, item }) => {
                     fontWeight: "600",
                   }}
                 >
-                  Delete
+                  {t("delete")}
                 </Text>
               </TouchableOpacity>
 
@@ -126,7 +128,7 @@ const ContentCard = ({ refreshParent,isFavourite, item }) => {
                     paddingVertical: 8,
                   }}
                 >
-                  Cancel
+                  {t("cancel")}
                 </Text>
               </TouchableOpacity>
             </Animated.View>

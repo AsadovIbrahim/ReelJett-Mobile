@@ -7,7 +7,7 @@ import { Text, View, FlatList,ActivityIndicator} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useMMKVString, useMMKVBoolean } from "react-native-mmkv";
 import PersonalContentCard from '../screens/personalmovie/components/PersonalContentCard';
-import {GetFavouriteProfessionalMovies,GetNewReleaseMovies,GetSearchedMovies,GetUpcomingMovies,GetAllPersonalMovies,GetTopRatedMovies,GetMyMovies} from '../utils/fetchs';
+import {GetFavouriteProfessionalMovies,GetNewReleaseMovies,GetSearchedMovies,GetUpcomingMovies,GetAllPersonalMovies,GetTopRatedMovies,GetMyMovies, GetFavouritePersonalMovies} from '../utils/fetchs';
   
 const ContentList = ({ 
   searchTerm, 
@@ -37,17 +37,17 @@ const ContentList = ({
           setData(data.movies);
         } 
         else if (searchQuery == null) {
-          if (searchTerm === "Upcoming") {
+          if (searchTerm === t("Upcoming")) {
             const data = await GetUpcomingMovies(selectedLanguage);
             setData(data.movies);
-          } else if (searchTerm === "New Release") {
+          } else if (searchTerm === t("New Release")) {
             const data = await GetNewReleaseMovies(page, moviesPerPage, selectedLanguage);
             setData(data.movies);
-          } else if (searchTerm === "Your Favourite") {
+          } else if (searchTerm === t("Your Favourite")) {
             const data = await GetFavouriteProfessionalMovies();
             setData(data);
             setIsFavourite(true);
-          } else if (searchTerm === "Top Rated") {
+          } else if (searchTerm === t("Top Rated")) {
             const data = await GetTopRatedMovies(selectedLanguage);
             setData(data.movies);
           }
@@ -56,6 +56,11 @@ const ContentList = ({
       else if(type==="video") {
         const data = myContent?await GetMyMovies():await GetAllPersonalMovies()
         setData(data);
+      }
+      else if(type==="videofav") {
+        const data = await GetFavouritePersonalMovies()
+        setData(data);
+        console.log(data)
       }
       
     } catch (error) {
@@ -130,7 +135,7 @@ const ContentList = ({
     renderItem={({ item }) => (
       type === "movie"
         ? <ContentCard refreshParent={getData} isFavourite={isFavourite} item={item} type={type} />
-        : <PersonalContentCard item={item} />
+        : <PersonalContentCard refreshParent={getData} item={item} myContent={myContent} type={type} />
     )}
   />
 )}

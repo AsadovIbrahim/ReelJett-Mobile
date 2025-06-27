@@ -6,9 +6,11 @@ import { faFilm } from '@fortawesome/free-solid-svg-icons/faFilm';
 import { faVideo } from '@fortawesome/free-solid-svg-icons/faVideo';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { useMMKVBoolean } from 'react-native-mmkv';
+import { useTranslation } from 'react-i18next';
 
 const TabBar = ({ state, navigation }) => {
   const [isDarkMode] = useMMKVBoolean("darkMode");
+  const { t } = useTranslation();
 
   return (
     <View
@@ -18,36 +20,47 @@ const TabBar = ({ state, navigation }) => {
       className="flex-row justify-around items-center py-4"
     >
       {state.routes.map((route, index) => {
-        const label = route.name;
+        const routeName = route.name;
         const isFocused = state.index === index;
 
-        // İkon rəngi
         const iconColor = isFocused
           ? (isDarkMode ? '#ffffff' : '#000000')
           : '#888589';
 
         let icon = null;
+        let label = '';
 
-        if (label === 'Home') {
-          icon = <FontAwesomeIcon icon={faHome} color={iconColor} size={24} />;
-        } else if (label === 'Profile') {
-          icon = <FontAwesomeIcon icon={faUser} color={iconColor} size={24} />;
-        } else if (label === 'Search') {
-          icon = <FontAwesomeIcon icon={faSearch} color={iconColor} size={24} />;
-        } else if (label === 'Movies') {
-          icon = <FontAwesomeIcon icon={faFilm} color={iconColor} size={24} />;
-        } else if (label === 'Videos') {
-          icon = <FontAwesomeIcon icon={faVideo} color={iconColor} size={24} />;
+        switch (routeName) {
+          case 'Home':
+            icon = <FontAwesomeIcon icon={faHome} color={iconColor} size={24} />;
+            label = t('tab_home');
+            break;
+          case 'Profile':
+            icon = <FontAwesomeIcon icon={faUser} color={iconColor} size={24} />;
+            label = t('tab_profile');
+            break;
+          case 'Search':
+            icon = <FontAwesomeIcon icon={faSearch} color={iconColor} size={24} />;
+            label = t('tab_search');
+            break;
+          case 'Movies':
+            icon = <FontAwesomeIcon icon={faFilm} color={iconColor} size={24} />;
+            label = t('tab_movies');
+            break;
+          case 'Videos':
+            icon = <FontAwesomeIcon icon={faVideo} color={iconColor} size={24} />;
+            label = t('tab_videos');
+            break;
+          default:
+            label = routeName;
         }
 
         const onPress = () => {
           const event = navigation.emit({ type: 'tabPress', target: route.key });
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+            navigation.navigate(routeName);
           }
         };
-
-      
 
         return (
           <TouchableOpacity

@@ -2,12 +2,14 @@ import { View, Text, Image } from 'react-native';
 import { useMMKVBoolean } from 'react-native-mmkv';
 import { useState, useEffect } from 'react';
 import ContentList from '../../common/ContentList';
+import { useTranslation } from 'react-i18next';
 import { storage } from '../../utils/MMKVStore';
 
 const MyVideos = () => {
   const [isDarkMode] = useMMKVBoolean("darkMode");
   const [imageUri, setImageUri] = useState();
   const [username, setUsername] = useState();
+  const {t} = useTranslation();
 
   useEffect(() => {
     setImageUri(storage.getString("profilePhoto"));
@@ -26,7 +28,7 @@ const MyVideos = () => {
       <Text className={`text-xl font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-black'}`}>
         {username}
       </Text>
-      <Text className="text-base text-gray-400">My Videos</Text>
+      <Text className="text-base text-gray-400">{t("my videos")}</Text>
     </View>
   );
 

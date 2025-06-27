@@ -27,8 +27,8 @@ const Register = () => {
     if (!formData[field] || formData[field].trim() === '') {
       Toast.show({
         type: 'error',
-        text1: 'Validation Error',
-        text2: `Please fill in your ${field}.`,
+        text1: t('registerFailedTitle'),
+        text2: t('registerValidationError', { field: t(`${field}-text`) || field }),
         position: 'top',
         visibilityTime: 3000,
         topOffset: 50,
@@ -41,8 +41,8 @@ const Register = () => {
   if (!emailRegex.test(formData.email)) {
     Toast.show({
       type: 'error',
-      text1: 'Invalid Email',
-      text2: 'Please enter a valid email address.',
+      text1: t('registerInvalidEmailTitle'),
+      text2: t('registerInvalidEmailText'),
       position: 'top',
       visibilityTime: 3000,
       topOffset: 50,
@@ -53,8 +53,8 @@ const Register = () => {
   if (formData.password !== formData.confirmPassword) {
     Toast.show({
       type: 'error',
-      text1: 'Password Mismatch',
-      text2: 'Password and Confirm Password must match.',
+      text1: t('registerPasswordMismatchTitle'),
+      text2: t('registerPasswordMismatchText'),
       position: 'top',
       visibilityTime: 3000,
       topOffset: 50,
@@ -67,8 +67,8 @@ const Register = () => {
   if (data.success) {
     Toast.show({
       type: 'success',
-      text1: 'Register Success',
-      text2: data.message || 'Confirm your email to complete your registration',
+      text1: t('registerSuccessTitle'),
+      text2: data.message || t('registerSuccessText'),
       position: 'top',
       visibilityTime: 3000,
       topOffset: 50,
@@ -79,14 +79,15 @@ const Register = () => {
   } else {
     Toast.show({
       type: 'error',
-      text1: 'Register Failed',
-      text2: data.message || 'Something went wrong',
+      text1: t('registerFailedTitle'),
+      text2: data.message || t('registerFailedText'),
       position: 'top',
       visibilityTime: 3000,
       topOffset: 50,
     });
   }
 };
+
 
 
   const textColor = isDarkMode ? '#FFFFFF' : '#000000'

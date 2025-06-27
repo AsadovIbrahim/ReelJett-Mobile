@@ -2,7 +2,6 @@ const VITE_BASE_URL="http://10.0.2.2:5124/api"
 // const VITE_BASE_URL="https://10.0.2.2:7109/api"
 
 
-
 export const GetNewReleaseMovies = async (page,moviesPerPage,selectedLanguage) => {
     try {
         const response=await fetch(`${VITE_BASE_URL}/Movie/GetNewReleaseMovies?page=${page}&moviesPerPage=${moviesPerPage}&language=${selectedLanguage}`)
@@ -149,29 +148,40 @@ export const RegisterFetch = async (formData) => {
     return { success: false, message: "Server error occurred." };    }
 }
 
-export const ForgotPasswordFetch=async(formData)=>{
-    try{
-        const response=await fetch(`${VITE_BASE_URL}/Auth/ForgotPassword`,{
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body:JSON.stringify(formData)
-        })
-        if (!response.ok) {
-        const errorText = await response.text();
-        return { success: false, message: errorText };
-    }
+export const ForgotPasswordFetch = async (formData) => {
+  try {
+    const response = await fetch(`${VITE_BASE_URL}/Auth/ForgotPassword`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
     if (!response.ok) {
-      return { success: false, message: "Failed to send reset link. Please try again." };
+      return {
+        success: false,
+        messageKey: "forgotPasswordErrorServer",
+      };
     }
-    return { success: true, message: "Reset link sent successfully. Please check your email." };
+
+    const result = await response.json();
+    return {
+      success: true,
+      messageKey: "forgotPasswordSuccessMessage",
+    };
+
   } catch (error) {
     console.error(error);
-    return { success: false, message: "An error occurred. Please try again later." };
+    return {
+      success: false,
+      messageKey: "forgotPasswordErrorNetwork",
+    };
   }
-}
+};
+
+
 
 
 export const GetAccountData = async () => {
@@ -247,6 +257,17 @@ export const AddToFavourites = async (id) => {
               'Content-Type': 'application/json',
             }
         });
+        const data = await response.json()
+        return data;
+    }  
+    catch(error) {
+        console.error(error)
+    }
+}
+
+export const GetFavouritePersonalMovies = async () => {
+    try {
+        const response=await fetch(`${VITE_BASE_URL}/Favourite/GetFavouritePersonalMovies`)
         const data = await response.json()
         return data;
     }  
@@ -392,3 +413,69 @@ export const DeleteComment = async (commentId)=>{
 
 
 
+
+
+
+export const GetUserLikes=async(movieid)=>{
+    try{
+        const response= await fetch(`${VITE_BASE_URL}/PersonalMovie/GetUserLikes?movieid=${movieid}`);
+        const data=await response.json();
+        return data;  
+
+    }catch(error){
+        console.error(error);
+    }
+}
+
+export const GetUserDislikes=async(movieid)=>{
+    try{
+        const response= await fetch(`${VITE_BASE_URL}/PersonalMovie/GetUserDislikes?movieid=${movieid}`);
+        const data=await response.json();
+        return data;  
+
+    }catch(error){
+        console.error(error);
+    }
+}
+
+export const GetUserViews=async(movieid)=>{
+    try{
+        const response= await fetch(`${VITE_BASE_URL}/PersonalMovie/GetUserViews?movieid=${movieid}`);
+        const data=await response.json();
+        return data;  
+
+    }catch(error){
+        console.error(error);
+    }
+}
+
+
+export const DeletePersonalMovie = async (movieid) => {
+    try {
+        const response = await fetch(`${VITE_BASE_URL}/PersonalMovie/DeletePersonalMovie?movieId=${movieid}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+    }
+    catch(error) {
+        console.error(error)
+    }
+    
+}
+
+
+export const DeleteUnwantedComment = async (movieid,commentId)=>{
+    try{
+        const response=await fetch(`${VITE_BASE_URL}/Comment/DeleteUnwantedComment?movieid=${movieid}&commentid=${commentId}`,{
+            method:'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        });
+    }
+    catch(error){
+        console.error(error);
+    }
+}

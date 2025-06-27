@@ -33,7 +33,7 @@ const Poster = () => {
         if(data==200){
           Toast.show({
             type: 'success',
-            text1: 'Success',
+            text1: t('success'),
             text2: t("favourites-add-ok"),
             position: 'top',
             visibilityTime: 3000,
@@ -53,7 +53,7 @@ const Poster = () => {
         else if(data==401) {
           Toast.show({
             type: 'error',
-            text1: 'Error',
+            text1: t('error'),
             text2: t('must-be-logged-in-text'),
             position: 'top',
             visibilityTime: 3000,
