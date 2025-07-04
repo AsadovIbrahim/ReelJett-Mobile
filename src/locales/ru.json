@@ -95,6 +95,8 @@
 
 
 
+
+
 "forgotPassword": "Забыли пароль?",
 "forgotPasswordTitle": "Забыли пароль?",
 "forgotPasswordSubText": "Введите ваш адрес электронной почты, и мы отправим ссылку для сброса пароля.",
@@ -120,7 +122,17 @@
   "tab_search": "Поиск",
   "tab_movies": "Фильмы",
   "tab_videos": "Видео",
-  "tab_profile": "Профиль"
+  "tab_profile": "Профиль",
+
+  
+  "video player": "Видеоплеер",
+  "likedby": "Понравилось",
+  "dislikedby": "Не понравилось",
+  "close": "Закрыть",
+  "viewedby": "Просмотрено" ,
+
+    "searched": "Поиск"
+
 
 
 

@@ -479,3 +479,31 @@ export const DeleteUnwantedComment = async (movieid,commentId)=>{
         console.error(error);
     }
 }
+
+export const GetHistory = async () => {
+    try {
+ 
+        response = await fetch(`${VITE_BASE_URL}/History/GetHistoryMovies`);
+        const data = await response.json()
+        return data;
+    }  
+    catch(error) {
+        console.error(error)
+    }
+}
+
+export const AddToHistory = async (id) => {
+    try {
+        const response = await fetch(`${VITE_BASE_URL}/History/AddMovieToHistory?movieId=${id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        });
+        const data = await response.text()
+        return data;
+    }  
+    catch(error) {
+        console.error(error)
+    }
+}

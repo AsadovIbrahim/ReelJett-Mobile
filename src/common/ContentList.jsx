@@ -3,29 +3,35 @@ import SkeletonCard from './SkeletonCard';
 import { useState, useCallback } from 'react';
 import Toast from 'react-native-toast-message'
 import { useTranslation } from 'react-i18next';
-import { Text, View, FlatList,ActivityIndicator} from 'react-native';
+import { Text, View, FlatList,ActivityIndicator,Dimensions} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useMMKVString, useMMKVBoolean } from "react-native-mmkv";
 import PersonalContentCard from '../screens/personalmovie/components/PersonalContentCard';
-import {GetFavouriteProfessionalMovies,GetNewReleaseMovies,GetSearchedMovies,GetUpcomingMovies,GetAllPersonalMovies,GetTopRatedMovies,GetMyMovies, GetFavouritePersonalMovies} from '../utils/fetchs';
-  
-const ContentList = ({ 
-  searchTerm, 
-  searchQuery, 
+import {GetFavouriteProfessionalMovies,GetNewReleaseMovies,GetSearchedMovies,GetUpcomingMovies,GetAllPersonalMovies,GetTopRatedMovies,GetMyMovies,GetHistory, GetFavouritePersonalMovies} from '../utils/fetchs';
+ 
+const ContentList = ({
+  searchTerm,
+  searchQuery,
   type,
   myContent=false,
   ListHeaderComponent = null,
   showLoading = true,  
   loadingType = "skeleton"}) => {
-
-    
+ 
+   
   const [data, setData] = useState([]);
   const [isFavourite, setIsFavourite] = useState(false);
+  const [isHistory, setIsHistory] = useState(false);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
   const [selectedLanguage] = useMMKVString("selectedLanguage");
   const [isDarkMode] = useMMKVBoolean("darkMode");
-
+ 
+  const screenWidth = Dimensions.get('window').width;
+  const itemWidth = 130;
+  const columnCount = Math.max(1, Math.floor(screenWidth / itemWidth));
+ 
+ 
   const getData = async () => {
     setLoading(true);
     try {
@@ -35,7 +41,7 @@ const ContentList = ({
         if (searchQuery !== "" && searchTerm == null) {
           const data = await GetSearchedMovies(searchQuery, page, moviesPerPage, selectedLanguage);
           setData(data.movies);
-        } 
+        }
         else if (searchQuery == null) {
           if (searchTerm === t("Upcoming")) {
             const data = await GetUpcomingMovies(selectedLanguage);
@@ -50,6 +56,10 @@ const ContentList = ({
           } else if (searchTerm === t("Top Rated")) {
             const data = await GetTopRatedMovies(selectedLanguage);
             setData(data.movies);
+          } else if (searchTerm === t('history')) {
+            const data = await GetHistory();
+            setData(data);
+            setIsHistory(true)
           }
         }
       }
@@ -60,13 +70,12 @@ const ContentList = ({
       else if(type==="videofav") {
         const data = await GetFavouritePersonalMovies()
         setData(data);
-        console.log(data)
       }
-      
+     
     } catch (error) {
         Toast.show({
             type: 'error',
-            text1: 'Error',
+            text1: t('error'),
             text2: error,
             position: 'top',
             visibilityTime: 3000,
@@ -76,7 +85,7 @@ const ContentList = ({
       setLoading(false);
     }
   };
-
+ 
   const NoItems = () => (
     <View className='w-full h-full items-center justify-center'>
       <Text style={{ color: isDarkMode ? '#fff' : '#000' }}>
@@ -84,13 +93,13 @@ const ContentList = ({
       </Text>
     </View>
   );
-
+ 
   useFocusEffect(
     useCallback(() => {
       getData();
     }, [searchTerm, searchQuery, type])
   );
-
+ 
   return (
   <View className='mt-6'>
     {type === "movie" && (
@@ -98,10 +107,10 @@ const ContentList = ({
         className='font-manropeBold text-white font-extrabold text-3xl ml-8 mb-5'
         style={{ color: isDarkMode ? '#fff' : '#000' }}
       >
-        {(searchTerm ? searchTerm : "Searched") + " " + t("movies")}
+        {(searchTerm ? searchTerm : t("searched")) + " " + t("movies")}
       </Text>
     )}
-
+ 
     {loading && showLoading ? (
   loadingType === "basic" ? (
     <View className="w-full h-[200px] justify-center items-center">
@@ -113,7 +122,7 @@ const ContentList = ({
   ) : (
     <View className="w-full h-[200px] justify-center">
       <FlatList
-        horizontal={type === "movie"}
+        horizontal={type === "movie" && !isHistory}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 22, gap: 8 }}
         data={Array(8).fill(0)}
@@ -123,10 +132,12 @@ const ContentList = ({
         )}
       />
     </View>
-  ) 
+  )
 ) : (
   <FlatList
-    horizontal={type === "movie"}
+    horizontal={type === "movie" && !isHistory}
+    key={isHistory ? `columns-${columnCount}` : 'horizontal'}
+    numColumns={isHistory?columnCount:1}
     showsHorizontalScrollIndicator={false}
     ListHeaderComponent={ListHeaderComponent}
     ListEmptyComponent={NoItems}
@@ -134,15 +145,15 @@ const ContentList = ({
     data={data}
     renderItem={({ item }) => (
       type === "movie"
-        ? <ContentCard refreshParent={getData} isFavourite={isFavourite} item={item} type={type} />
+        ? <ContentCard refreshParent={getData} isHistory={isHistory} isFavourite={isFavourite} item={item} type={type} />
         : <PersonalContentCard refreshParent={getData} item={item} myContent={myContent} type={type} />
     )}
   />
 )}
-
+ 
   </View>
 );
-
+ 
 };
-
+ 
 export default ContentList;

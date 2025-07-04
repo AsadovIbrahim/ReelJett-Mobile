@@ -6,6 +6,7 @@ import { useMMKVBoolean } from "react-native-mmkv";
 import { GetUserViews, SetViewCount } from "../utils/fetchs";
 import { TouchableOpacity, Modal, Pressable, FlatList } from "react-native";
 import { Image } from "react-native";
+import { t } from "i18next";
 
 const ViewCount = ({ movieId, initialCount,myContent }) => {
     const [viewCount, setViewCount] = useState(initialCount || 0);
@@ -103,7 +104,7 @@ const ViewCount = ({ movieId, initialCount,myContent }) => {
                     fontSize: 16,
                     marginBottom: 10
                 }}>
-                    Viewed by
+                    {t("viewedby")}
                 </Text>
 
                 <FlatList
@@ -114,7 +115,7 @@ const ViewCount = ({ movieId, initialCount,myContent }) => {
                 />
 
                 <Pressable onPress={() => setModalVisible(false)} style={{ marginTop: 10 }}>
-                    <Text style={{ color:isDarkMode?"white":"black", textAlign: 'right' }}>Close</Text>
+                    <Text style={{ color:isDarkMode?"white":"black", textAlign: 'right' }}>{t("close")}</Text>
                 </Pressable>
                 </View>
             </View>

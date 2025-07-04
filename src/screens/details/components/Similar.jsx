@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useMMKVString } from 'react-native-mmkv';
+import { useMMKVString,useMMKVBoolean } from 'react-native-mmkv';
 import { Text, View, FlatList} from 'react-native'
 import ContentCard from '../../../common/ContentCard';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import { GetSimilarMovies } from '../../../utils/fetchs';
 const Similar = ({id,type}) => {
     const [data, setData] = useState([])
     const { t }=useTranslation()
+    const [isDarkMode] = useMMKVBoolean("darkMode");
     const [selectedLanguage, setSelectedLanguage] = useMMKVString("selectedLanguage");
 
 
@@ -29,7 +30,7 @@ const Similar = ({id,type}) => {
   return (
     <>
     <View className='mt-6'>
-      <Text className='font-extrabold text-white text-2xl mb-3'>{t("similar")} {type==="movie"?`${t("movies")}`:`${t("tvshows")}`}</Text>
+      <Text style={{color:isDarkMode?"white":"black"}} className='font-extrabold text-white text-2xl mb-3'>{t("similar")} {type==="movie"?`${t("movies")}`:`${t("tvshows")}`}</Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

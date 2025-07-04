@@ -123,7 +123,7 @@ const LikeButton = ({ movieId, initialLike, initialDislike, myContent }) => {
               fontSize: 16,
               marginBottom: 10
             }}>
-              {modalType === "likes" ? "Liked by" : "Disliked by"}
+              {modalType === "likes" ? t("likedby") : t("dislikedby")}
             </Text>
 
             <FlatList
@@ -134,7 +134,7 @@ const LikeButton = ({ movieId, initialLike, initialDislike, myContent }) => {
             />
 
             <Pressable onPress={() => setModalVisible(false)} style={{ marginTop: 10 }}>
-              <Text style={{ color:isDarkMode?"white":"black", textAlign: 'right' }}>Close</Text>
+              <Text style={{ color:isDarkMode?"white":"black", textAlign: 'right' }}>{t("close")}</Text>
             </Pressable>
           </View>
         </View>

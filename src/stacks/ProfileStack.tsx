@@ -18,7 +18,7 @@ const ProfileStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen options={{header: () => <ProfileHeader pagename={storage.getString('username')||"Profile Main"}/>}} name="ProfileMain" component={ProfileMain} />
-            <Stack.Screen options={{header: () => <ProfileHeader pagename="History"/>}} name="History" component={History} />
+            <Stack.Screen options={{header: () => <ProfileHeader pagename={t("history")}/>}} name="History" component={History} />
             <Stack.Screen options={{header: () => <ProfileHeader pagename={t("my videos")}/>}} name="MyVideos" component={MyVideos} />
             <Stack.Screen options={{header: () => <ProfileHeader pagename={t("edit profile")}/>}} name="EditProfile" component={EditProfile} />
             <Stack.Screen options={{header: () => <ProfileHeader pagename={t("settings")}/>}} name="Settings" component={Settings} />

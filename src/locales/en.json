@@ -126,10 +126,21 @@
   "tab_search": "Search",
   "tab_movies": "Movies",
   "tab_videos": "Videos",
-  "tab_profile": "Profile"
+  "tab_profile": "Profile",
 
 
-  
+  "video player": "Video Player",
+  "likedby": "Liked by",
+  "dislikedby": "Disliked by",
+  "close": "Close",
+  "viewedby": "Viewed by",
+
+    "searched": "Searched"
+
+
+
+
+
 
 
 

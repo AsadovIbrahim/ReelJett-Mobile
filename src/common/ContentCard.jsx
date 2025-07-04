@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {  TouchableOpacity,  Text,  Animated,  Pressable,  Modal } from "react-native";
 import FastImage from "react-native-fast-image";
@@ -6,14 +7,13 @@ import { useMMKVBoolean } from 'react-native-mmkv';
 import { DeleteFromFavourites } from "../utils/fetchs";
 import { useTranslation } from "react-i18next";
 
-const ContentCard = ({ refreshParent,isFavourite, item }) => {
+const ContentCard = ({ refreshParent,isFavourite, isHistory , item  }) => {
 
   const navigation = useNavigation();
   const [isDarkMode] = useMMKVBoolean("darkMode");
   const [showInfoBar, setShowInfoBar] = useState(false);
   const slideAnim = useState(new Animated.Value(200))[0];
-  const {t} = useTranslation();
-
+  const { t }=useTranslation()
 
   const handleLongPress = () => {
     if (!isFavourite) return;
@@ -44,12 +44,29 @@ const ContentCard = ({ refreshParent,isFavourite, item }) => {
   return (
     <>
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("Home", {
-            screen: "Details",
-            params: { id: item.id , item },
-          })
-        }
+        onPress={() => {
+          if (!isHistory) {
+            navigation.navigate("Home", {
+              screen: "Details",
+              params: { id: item.id, item },
+            });
+          } else {
+            const movieToSend = {
+              id: item.id,
+              title: item.original_title,
+              original_title: item.original_title,
+              release_date: item.release_date || "2025",
+              vote_average: item.rating,
+              likeCount: item.likeCount,
+              dislikeCount: item.dislikeCount,
+            };
+            navigation.navigate("Home", {
+              screen: "MoviePlayer",
+              params: { movie: movieToSend },
+            });
+          }
+        }}
+
         onLongPress={handleLongPress}
         delayLongPress={300}
       >
@@ -60,7 +77,7 @@ const ContentCard = ({ refreshParent,isFavourite, item }) => {
             borderRadius: 12,
           }}
           source={{
-            uri: `https://image.tmdb.org/t/p/original${item.poster_path}`,
+            uri: (isHistory ? `https://image.tmdb.org/t/p/original${item.poster}` : `https://image.tmdb.org/t/p/original${item.poster_path}` ),
             priority: FastImage.priority.high,
           }}
           resizeMode={FastImage.resizeMode.contain}

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useState,useEffect,useCallback } from 'react';
 import { useRoute,useNavigation } from '@react-navigation/native';
@@ -9,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock'
 import { faPlay } from '@fortawesome/free-solid-svg-icons/faPlay'
-import { GetMovieDetails } from '../../utils/fetchs';
+import { AddToHistory, GetMovieDetails } from '../../utils/fetchs';
 import { GetTrailer } from '../../utils/fetchs';
 import { AddToFavourites } from '../../utils/fetchs';
 import Toast from 'react-native-toast-message'
@@ -50,7 +51,7 @@ const Details = () => {
       if(data==200){
         Toast.show({
           type: 'success',
-          text1: 'Success',
+          text1: t('success'),
           text2: t("favourites-add-ok"),
           position: 'top',
           visibilityTime: 3000,
@@ -60,7 +61,7 @@ const Details = () => {
       else if(data == 409) {
         Toast.show({
           type: 'error',
-          text1: 'Error',
+          text1: t('error'),
           text2: t('favourites-add-fail'),
           position: 'top',
           visibilityTime: 3000,
@@ -70,7 +71,7 @@ const Details = () => {
       else if(data==401) {
         Toast.show({
           type: 'error',
-          text1: 'Error',
+          text1: t('error'),
           text2: t('must-be-logged-in-text'),
           position: 'top',
           visibilityTime: 3000,
@@ -86,7 +87,6 @@ const Details = () => {
 
     useFocusEffect(
         useCallback(() => {
-          console.log(item);
           getDataById()
           getTrailersById()
         }, [id,type])
@@ -101,7 +101,7 @@ const Details = () => {
         onChangeState={onStateChange}
       />
       <View className='px-3'>
-        <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white text-3xl font-extrabold mb-2 mt-3'>{type==="tv"?data.name:item.title}</Text>
+        <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white text-3xl font-extrabold mb-2 mt-3'>{item.title}</Text>
         <View className='flex-row gap-5'>
           <Text style={{color:isDarkMode ? '#fff' : '#000'}} className='text-white mb-2 mt-3'>{data.categories}</Text>
           
@@ -113,7 +113,9 @@ const Details = () => {
         </View>
         <TouchableOpacity
             className="rounded-[4px] my-3 flex-row justify-center bg-[#3A3CB3] py-4 items-center gap-2"
-            onPress={() => {
+            onPress={async() => {
+            
+            await AddToHistory(item.id)
             const movieToSend = {
               id:item.id,
               title:item.title,
@@ -122,7 +124,6 @@ const Details = () => {
               vote_average: item.vote_average,
               likeCount:data.likeCount,
               dislikeCount:data.dislikeCount
-            
             };
             navigation.navigate("MoviePlayer", { movie: movieToSend, trailerKey });
             }}
