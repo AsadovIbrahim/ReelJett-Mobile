@@ -131,7 +131,23 @@
   "close": "Закрыть",
   "viewedby": "Просмотрено" ,
 
-    "searched": "Поиск"
+    "searched": "Поиск",
+
+
+
+    "Help & Frequently Asked Questions": "Помощь и Часто Задаваемые Вопросы",
+  "Below you'll find answers to common questions about using ReelJett.": "Ниже вы найдете ответы на часто задаваемые вопросы о ReelJett.",
+  "How to change my personal info?": "Как изменить личную информацию?",
+  "Go to Profile → Edit Profile page to change your personal info.": "Перейдите в Профиль → Редактировать профиль, чтобы изменить личные данные.",
+  "How to watch a movie?": "Как посмотреть фильм?",
+  "Press the play button in the movie details page.": "Нажмите кнопку воспроизведения на странице фильма.",
+  "How to see my own uploaded movies?": "Как увидеть мои загруженные фильмы?",
+  "Go to Profile → My Videos and explore your uploads.": "Перейдите в Профиль → Мои видео, чтобы увидеть ваши загрузки.",
+  "How to change the app’s language?": "Как изменить язык приложения?",
+  "Go to Profile → Settings and choose your preferred language.": "Перейдите в Профиль → Настройки и выберите предпочитаемый язык.",
+  "How to log out?": "Как выйти из аккаунта?",
+  "Go to Profile → Settings and tap on Log Out.": "Перейдите в Профиль → Настройки и нажмите Выйти.",
+  "Check out our website": "Посетите наш сайт"
 
 
 

@@ -133,7 +133,23 @@
   "close": "Kapat",
   "viewedby": "İzleyenler",
 
-    "searched": "Arama"
+    "searched": "Arama",
+
+
+
+    "Help & Frequently Asked Questions": "Yardım ve Sıkça Sorulan Sorular",
+  "Below you'll find answers to common questions about using ReelJett.": "Aşağıda ReelJett hakkında sıkça sorulan soruların cevaplarını bulacaksınız.",
+  "How to change my personal info?": "Kişisel bilgilerimi nasıl değiştirebilirim?",
+  "Go to Profile → Edit Profile page to change your personal info.": "Profil → Profili Düzenle sayfasına giderek kişisel bilgilerinizi değiştirebilirsiniz.",
+  "How to watch a movie?": "Film nasıl izlenir?",
+  "Press the play button in the movie details page.": "Film detayları sayfasındaki oynat düğmesine basın.",
+  "How to see my own uploaded movies?": "Yüklediğim filmleri nasıl görebilirim?",
+  "Go to Profile → My Videos and explore your uploads.": "Profil → Videolarım bölümüne giderek yüklemelerinizi görebilirsiniz.",
+  "How to change the app’s language?": "Uygulamanın dili nasıl değiştirilir?",
+  "Go to Profile → Settings and choose your preferred language.": "Profil → Ayarlar bölümüne gidip istediğiniz dili seçin.",
+  "How to log out?": "Oturumu nasıl kapatabilirim?",
+  "Go to Profile → Settings and tap on Log Out.": "Profil → Ayarlar'a gidip Çıkış Yap'a dokunun.",
+  "Check out our website": "Web sitemizi ziyaret edin"
 
 
 

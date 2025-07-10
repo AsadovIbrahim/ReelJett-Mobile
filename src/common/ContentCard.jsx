@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {  TouchableOpacity,  Text,  Animated,  Pressable,  Modal } from "react-native";
 import FastImage from "react-native-fast-image";

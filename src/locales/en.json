@@ -135,7 +135,22 @@
   "close": "Close",
   "viewedby": "Viewed by",
 
-    "searched": "Searched"
+    "searched": "Searched",
+
+
+    "Help & Frequently Asked Questions": "Help & Frequently Asked Questions",
+  "Below you'll find answers to common questions about using ReelJett.": "Below you'll find answers to common questions about using ReelJett.",
+  "How to change my personal info?": "How to change my personal info?",
+  "Go to Profile → Edit Profile page to change your personal info.": "Go to Profile → Edit Profile page to change your personal info.",
+  "How to watch a movie?": "How to watch a movie?",
+  "Press the play button in the movie details page.": "Press the play button in the movie details page.",
+  "How to see my own uploaded movies?": "How to see my own uploaded movies?",
+  "Go to Profile → My Videos and explore your uploads.": "Go to Profile → My Videos and explore your uploads.",
+  "How to change the app’s language?": "How to change the app’s language?",
+  "Go to Profile → Settings and choose your preferred language.": "Go to Profile → Settings and choose your preferred language.",
+  "How to log out?": "How to log out?",
+  "Go to Profile → Settings and tap on Log Out.": "Go to Profile → Settings and tap on Log Out.",
+  "Check out our website": "Check out our website"
 
 
 
